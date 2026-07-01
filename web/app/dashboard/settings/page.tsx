@@ -315,12 +315,14 @@ export default function SettingsPage() {
     setSeedErr(null)
     try {
       const res = await api.seedSampleData({ workspace_id: workspaceId })
-      const created = res && typeof res === 'object' ? (res as { created?: unknown }).created : null
-      if (created && typeof created === 'object') {
-        const parts = Object.entries(created as Record<string, unknown>)
+      const result = (res ?? {}) as { created?: unknown; skipped?: boolean; reason?: string }
+      if (result.skipped) {
+        setSeedResult(result.reason ?? 'Skipped: workspace already has data.')
+      } else if (result.created && typeof result.created === 'object') {
+        const parts = Object.entries(result.created as Record<string, unknown>)
           .map(([k, v]) => `${v} ${k}`)
           .join(', ')
-        setSeedResult(`Created ${parts}.`)
+        setSeedResult(parts ? `Created ${parts}.` : 'Sample data generated.')
       } else {
         setSeedResult('Sample data generated.')
       }
