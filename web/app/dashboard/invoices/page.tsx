@@ -168,6 +168,18 @@ export default function InvoicesPage() {
         tax_cents: taxCents,
         total_cents: subtotalCents + taxCents,
         source: form.source || 'manual',
+        lines:
+          subtotalCents > 0
+            ? [
+                {
+                  line_number: 1,
+                  amount_cents: subtotalCents,
+                  tax_cents: taxCents,
+                  rate_charged: subtotalCents > 0 ? taxCents / subtotalCents : 0,
+                  jurisdiction_charged: form.ship_to_state || null,
+                },
+              ]
+            : undefined,
       })
       setCreateOpen(false)
       setForm(emptyForm)
