@@ -15,7 +15,7 @@ import {
   statute_rules,
   workspace_members,
 } from '../db/schema.js'
-import { eq, and, desc } from 'drizzle-orm'
+import { eq, and, desc, ne } from 'drizzle-orm'
 import { authMiddleware, getUserId } from '../lib/auth.js'
 
 const router = new Hono()
@@ -309,14 +309,21 @@ router.post('/run', authMiddleware, zValidator('json', runSchema), async (c) => 
 
   const ctx = await buildContext(workspace_id)
 
-  // Select invoices in scope. scope 'all' = every invoice; otherwise treat scope
-  // as an invoice status filter.
+  // Select invoices in scope. 'all'/'full' = every invoice; 'unaudited' = not yet
+  // audited; 'recent' = most recently created; anything else is treated as a
+  // literal invoice status filter.
   const invConditions = [eq(invoices.workspace_id, workspace_id)]
-  if (scope && scope !== 'all') invConditions.push(eq(invoices.status, scope))
-  const invs = await db
+  if (scope === 'unaudited') {
+    invConditions.push(ne(invoices.status, 'audited'))
+  } else if (scope && scope !== 'all' && scope !== 'full' && scope !== 'recent') {
+    invConditions.push(eq(invoices.status, scope))
+  }
+  let invs = await db
     .select()
     .from(invoices)
     .where(and(...invConditions))
+    .orderBy(desc(invoices.created_at))
+  if (scope === 'recent') invs = invs.slice(0, 20)
 
   // Create the run row up front so findings can reference it.
   const [run] = await db
