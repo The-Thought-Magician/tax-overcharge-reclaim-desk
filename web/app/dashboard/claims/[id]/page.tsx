@@ -304,7 +304,7 @@ export default function ClaimDetailPage() {
   return (
     <div className="space-y-8">
       <div>
-        <Link href="/dashboard/claims" className="text-sm text-slate-400 hover:text-teal-300">
+        <Link href="/dashboard/claims" className="text-sm text-neutral-400 hover:text-orange-300">
           ← Back to Claims
         </Link>
       </div>
@@ -319,7 +319,7 @@ export default function ClaimDetailPage() {
               {claim.status.replace(/_/g, ' ')}
             </Badge>
           </div>
-          <p className="mt-1 text-sm capitalize text-slate-400">
+          <p className="mt-1 text-sm capitalize text-neutral-400">
             {claim.claim_type.replace(/_/g, ' ')}
             {claim.jurisdiction ? ` · ${claim.jurisdiction}` : ''} · created {when(claim.created_at)}
           </p>
@@ -351,8 +351,8 @@ export default function ClaimDetailPage() {
 
       {claim.note && (
         <Card className="p-5">
-          <div className="mb-1 text-xs font-medium uppercase tracking-wide text-slate-500">Note</div>
-          <p className="whitespace-pre-wrap text-sm text-slate-300">{claim.note}</p>
+          <div className="mb-1 text-xs font-medium uppercase tracking-wide text-neutral-500">Note</div>
+          <p className="whitespace-pre-wrap text-sm text-neutral-300">{claim.note}</p>
         </Card>
       )}
 
@@ -360,7 +360,7 @@ export default function ClaimDetailPage() {
         {/* Attached findings */}
         <div className="lg:col-span-2">
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-400">
               Attached Findings
             </h2>
             <Button variant="ghost" onClick={() => setAttachOpen(true)}>
@@ -387,17 +387,17 @@ export default function ClaimDetailPage() {
               <TBody>
                 {attached.map((f) => (
                   <TR key={f.id}>
-                    <TD className="capitalize text-slate-200">{f.type.replace(/_/g, ' ')}</TD>
-                    <TD className="text-slate-400">{f.jurisdiction || '—'}</TD>
-                    <TD className="text-right tabular-nums font-medium text-teal-300">
+                    <TD className="capitalize text-neutral-200">{f.type.replace(/_/g, ' ')}</TD>
+                    <TD className="text-neutral-400">{f.jurisdiction || '—'}</TD>
+                    <TD className="text-right tabular-nums font-medium text-orange-300">
                       {money(f.recoverable_cents || 0)}
                     </TD>
-                    <TD className="text-slate-400">
+                    <TD className="text-neutral-400">
                       {f.statute_deadline
                         ? new Date(f.statute_deadline).toLocaleDateString('en-US')
                         : '—'}
                     </TD>
-                    <TD className="capitalize text-slate-400">{f.status}</TD>
+                    <TD className="capitalize text-neutral-400">{f.status}</TD>
                   </TR>
                 ))}
               </TBody>
@@ -407,7 +407,7 @@ export default function ClaimDetailPage() {
 
         {/* Activity */}
         <div>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-400">Activity</h2>
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-neutral-400">Activity</h2>
           <Card className="p-4">
             <div className="mb-4 flex gap-2">
               <input
@@ -417,26 +417,26 @@ export default function ClaimDetailPage() {
                   if (e.key === 'Enter') addNote()
                 }}
                 placeholder="Add a note…"
-                className="flex-1 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none"
+                className="flex-1 rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-orange-500 focus:outline-none"
               />
               <Button onClick={addNote} disabled={addingNote || !noteText.trim()}>
                 {addingNote ? '…' : 'Add'}
               </Button>
             </div>
             {sortedActivity.length === 0 ? (
-              <p className="py-6 text-center text-sm text-slate-500">No activity recorded yet.</p>
+              <p className="py-6 text-center text-sm text-neutral-500">No activity recorded yet.</p>
             ) : (
-              <ol className="relative space-y-4 border-l border-slate-800 pl-4">
+              <ol className="relative space-y-4 border-l border-neutral-800 pl-4">
                 {sortedActivity.map((a) => (
                   <li key={a.id} className="relative">
-                    <span className="absolute -left-[1.30rem] top-1.5 h-2 w-2 rounded-full bg-teal-500" />
+                    <span className="absolute -left-[1.30rem] top-1.5 h-2 w-2 rounded-full bg-orange-500" />
                     <div className="flex items-center gap-2">
                       <Badge tone="slate" className="capitalize">
                         {a.action.replace(/_/g, ' ')}
                       </Badge>
-                      <span className="text-xs text-slate-500">{when(a.created_at)}</span>
+                      <span className="text-xs text-neutral-500">{when(a.created_at)}</span>
                     </div>
-                    {a.detail && <p className="mt-1 text-sm text-slate-300">{a.detail}</p>}
+                    {a.detail && <p className="mt-1 text-sm text-neutral-300">{a.detail}</p>}
                   </li>
                 ))}
               </ol>
@@ -464,13 +464,13 @@ export default function ClaimDetailPage() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
                 Status
               </label>
               <select
                 value={editForm.status}
                 onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm capitalize text-white focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm capitalize text-white focus:border-orange-500 focus:outline-none"
               >
                 {STATUSES.map((s) => (
                   <option key={s} value={s}>
@@ -480,19 +480,19 @@ export default function ClaimDetailPage() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
                 Jurisdiction
               </label>
               <input
                 value={editForm.jurisdiction}
                 onChange={(e) => setEditForm({ ...editForm, jurisdiction: e.target.value })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
               />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
                 Expected (USD)
               </label>
               <input
@@ -501,11 +501,11 @@ export default function ClaimDetailPage() {
                 step="0.01"
                 value={editForm.expected_cents}
                 onChange={(e) => setEditForm({ ...editForm, expected_cents: e.target.value })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
                 Recovered (USD)
               </label>
               <input
@@ -514,29 +514,29 @@ export default function ClaimDetailPage() {
                 step="0.01"
                 value={editForm.recovered_cents}
                 onChange={(e) => setEditForm({ ...editForm, recovered_cents: e.target.value })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
               />
             </div>
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
               Reference #
             </label>
             <input
               value={editForm.reference_number}
               onChange={(e) => setEditForm({ ...editForm, reference_number: e.target.value })}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
               Note
             </label>
             <textarea
               value={editForm.note}
               onChange={(e) => setEditForm({ ...editForm, note: e.target.value })}
               rows={3}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
             />
           </div>
         </div>
@@ -564,10 +564,10 @@ export default function ClaimDetailPage() {
             value={attachSearch}
             onChange={(e) => setAttachSearch(e.target.value)}
             placeholder="Search findings by type, jurisdiction, reason…"
-            className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none"
+            className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-orange-500 focus:outline-none"
           />
           {candidates.length === 0 ? (
-            <p className="py-6 text-center text-sm text-slate-500">
+            <p className="py-6 text-center text-sm text-neutral-500">
               {allFindings.length === 0
                 ? 'No findings available in this workspace.'
                 : 'No unattached findings match your search.'}
@@ -581,26 +581,26 @@ export default function ClaimDetailPage() {
                     key={f.id}
                     className={`flex cursor-pointer items-center gap-3 rounded-lg border px-3 py-2 transition-colors ${
                       checked
-                        ? 'border-teal-600 bg-teal-950/40'
-                        : 'border-slate-700 bg-slate-800/50 hover:bg-slate-800'
+                        ? 'border-orange-600 bg-orange-950/40'
+                        : 'border-neutral-700 bg-neutral-800/50 hover:bg-neutral-800'
                     }`}
                   >
                     <input
                       type="checkbox"
                       checked={checked}
                       onChange={() => toggleSelected(f.id)}
-                      className="h-4 w-4 accent-teal-500"
+                      className="h-4 w-4 accent-orange-500"
                     />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium capitalize text-slate-200">
+                        <span className="text-sm font-medium capitalize text-neutral-200">
                           {f.type.replace(/_/g, ' ')}
                         </span>
-                        <span className="text-xs text-slate-500">{f.jurisdiction || '—'}</span>
+                        <span className="text-xs text-neutral-500">{f.jurisdiction || '—'}</span>
                       </div>
-                      {f.reason && <p className="truncate text-xs text-slate-500">{f.reason}</p>}
+                      {f.reason && <p className="truncate text-xs text-neutral-500">{f.reason}</p>}
                     </div>
-                    <span className="shrink-0 text-sm font-medium tabular-nums text-teal-300">
+                    <span className="shrink-0 text-sm font-medium tabular-nums text-orange-300">
                       {money(f.recoverable_cents || 0)}
                     </span>
                   </label>

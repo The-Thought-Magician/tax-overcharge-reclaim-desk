@@ -187,7 +187,7 @@ export default function AnalyticsPage() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-white">Recovery Analytics</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Overcharge leakage, claimable exposure, and recovery performance.
           </p>
         </div>
@@ -241,14 +241,14 @@ export default function AnalyticsPage() {
       {/* Recovery progress bar */}
       <Card className="p-6">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-sm font-semibold text-slate-200">Recovery Progress</h2>
-          <span className="text-xs text-slate-500">
+          <h2 className="text-sm font-semibold text-neutral-200">Recovery Progress</h2>
+          <span className="text-xs text-neutral-500">
             {fmtUSD(overview?.total_recovered_cents)} of {fmtUSD(overview?.total_claimable_cents)}
           </span>
         </div>
-        <div className="h-4 w-full overflow-hidden rounded-full bg-slate-800">
+        <div className="h-4 w-full overflow-hidden rounded-full bg-neutral-800">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-teal-600 to-emerald-400 transition-all"
+            className="h-full rounded-full bg-gradient-to-r from-orange-600 to-emerald-400 transition-all"
             style={{
               width: `${Math.min(
                 100,
@@ -259,7 +259,7 @@ export default function AnalyticsPage() {
             }}
           />
         </div>
-        <div className="mt-2 flex justify-between text-xs text-slate-500">
+        <div className="mt-2 flex justify-between text-xs text-neutral-500">
           <span>Recovered</span>
           <span>Outstanding claimable</span>
         </div>
@@ -269,20 +269,20 @@ export default function AnalyticsPage() {
       <Card className="p-6">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="text-sm font-semibold text-slate-200">Recoverable Breakdown</h2>
-            <p className="mt-0.5 text-xs text-slate-500">
+            <h2 className="text-sm font-semibold text-neutral-200">Recoverable Breakdown</h2>
+            <p className="mt-0.5 text-xs text-neutral-500">
               Distribution of recoverable exposure by dimension.
             </p>
           </div>
-          <div className="inline-flex rounded-lg border border-slate-700 bg-slate-900 p-1">
+          <div className="inline-flex rounded-lg border border-neutral-700 bg-neutral-900 p-1">
             {DIMENSIONS.map((d) => (
               <button
                 key={d.id}
                 onClick={() => setDimension(d.id)}
                 className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                   dimension === d.id
-                    ? 'bg-teal-600 text-white'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-orange-600 text-white'
+                    : 'text-neutral-400 hover:text-white'
                 }`}
               >
                 {d.label}
@@ -309,10 +309,10 @@ export default function AnalyticsPage() {
                 return (
                   <div key={r.key ?? i}>
                     <div className="mb-1 flex items-center justify-between text-xs">
-                      <span className="truncate font-medium text-slate-300">{rowLabel(r)}</span>
-                      <span className="tabular-nums text-slate-400">{fmtUSD(val)}</span>
+                      <span className="truncate font-medium text-neutral-300">{rowLabel(r)}</span>
+                      <span className="tabular-nums text-neutral-400">{fmtUSD(val)}</span>
                     </div>
-                    <div className="h-3 w-full overflow-hidden rounded-full bg-slate-800">
+                    <div className="h-3 w-full overflow-hidden rounded-full bg-neutral-800">
                       <div
                         className="h-full rounded-full transition-all"
                         style={{
@@ -328,7 +328,7 @@ export default function AnalyticsPage() {
 
             {/* Distribution composition bar */}
             <div>
-              <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-neutral-500">
                 Composition
               </div>
               <div className="flex h-6 w-full overflow-hidden rounded-lg">
@@ -375,7 +375,7 @@ export default function AnalyticsPage() {
                           {rowLabel(r)}
                         </span>
                       </TD>
-                      <TD className="text-right tabular-nums text-teal-300">{fmtUSD(val)}</TD>
+                      <TD className="text-right tabular-nums text-orange-300">{fmtUSD(val)}</TD>
                       <TD className="text-right tabular-nums">{rowCount(r)}</TD>
                       <TD className="text-right">
                         <Badge tone="slate">{share.toFixed(1)}%</Badge>

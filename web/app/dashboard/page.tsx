@@ -135,7 +135,7 @@ export default function DashboardPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Recovery Overview</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Overpaid sales and use tax you can still claim back, ranked by statute risk.
           </p>
         </div>
@@ -205,11 +205,11 @@ export default function DashboardPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-base font-semibold text-white">At Risk by Statute Window</h2>
-                  <p className="mt-0.5 text-sm text-slate-500">
+                  <p className="mt-0.5 text-sm text-neutral-500">
                     {money(expiringTotal)} recoverable across {expiring.length} findings
                   </p>
                 </div>
-                <Link href="/dashboard/statute" className="text-sm text-teal-400 hover:text-teal-300">
+                <Link href="/dashboard/statute" className="text-sm text-orange-400 hover:text-orange-300">
                   Statute clock →
                 </Link>
               </div>
@@ -223,20 +223,20 @@ export default function DashboardPage() {
                   buckets.map((b) => (
                     <div key={b.label}>
                       <div className="mb-1 flex items-center justify-between text-sm">
-                        <span className="flex items-center gap-2 text-slate-300">
+                        <span className="flex items-center gap-2 text-neutral-300">
                           <Badge tone={b.tone}>{b.label}</Badge>
-                          <span className="text-slate-500">{b.count} findings</span>
+                          <span className="text-neutral-500">{b.count} findings</span>
                         </span>
-                        <span className="font-medium tabular-nums text-slate-200">{money(b.cents)}</span>
+                        <span className="font-medium tabular-nums text-neutral-200">{money(b.cents)}</span>
                       </div>
-                      <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-800">
+                      <div className="h-2.5 w-full overflow-hidden rounded-full bg-neutral-800">
                         <div
                           className={
                             b.tone === 'rose'
                               ? 'h-full rounded-full bg-rose-500'
                               : b.tone === 'amber'
                                 ? 'h-full rounded-full bg-amber-500'
-                                : 'h-full rounded-full bg-teal-500'
+                                : 'h-full rounded-full bg-orange-500'
                           }
                           style={{ width: `${Math.max(b.cents > 0 ? 6 : 0, (b.cents / maxBucketCents) * 100)}%` }}
                         />
@@ -260,29 +260,29 @@ export default function DashboardPage() {
                   alerts.slice(0, 12).map((a, i) => {
                     const tone = alertTone(a.severity, a.type)
                     const body = (
-                      <div className="flex items-start gap-3 rounded-lg border border-slate-800 bg-slate-900/50 p-3 transition-colors hover:border-slate-700">
+                      <div className="flex items-start gap-3 rounded-lg border border-neutral-800 bg-neutral-900/50 p-3 transition-colors hover:border-neutral-700">
                         <span
                           className={
                             tone === 'rose'
                               ? 'mt-1.5 h-2 w-2 shrink-0 rounded-full bg-rose-400'
                               : tone === 'amber'
                                 ? 'mt-1.5 h-2 w-2 shrink-0 rounded-full bg-amber-400'
-                                : 'mt-1.5 h-2 w-2 shrink-0 rounded-full bg-teal-400'
+                                : 'mt-1.5 h-2 w-2 shrink-0 rounded-full bg-orange-400'
                           }
                         />
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-2">
-                            <p className="truncate text-sm font-medium text-slate-200">{a.title}</p>
+                            <p className="truncate text-sm font-medium text-neutral-200">{a.title}</p>
                             {a.amount_cents != null && (
-                              <span className="shrink-0 text-sm font-semibold tabular-nums text-slate-300">
+                              <span className="shrink-0 text-sm font-semibold tabular-nums text-neutral-300">
                                 {money(a.amount_cents)}
                               </span>
                             )}
                           </div>
-                          {a.detail && <p className="mt-0.5 truncate text-xs text-slate-500">{a.detail}</p>}
+                          {a.detail && <p className="mt-0.5 truncate text-xs text-neutral-500">{a.detail}</p>}
                           <div className="mt-1 flex items-center gap-2">
                             <Badge tone={tone}>{a.type?.replace(/[_-]/g, ' ') || 'alert'}</Badge>
-                            {a.date && <span className="text-xs text-slate-600">{new Date(a.date).toLocaleDateString()}</span>}
+                            {a.date && <span className="text-xs text-neutral-600">{new Date(a.date).toLocaleDateString()}</span>}
                           </div>
                         </div>
                       </div>

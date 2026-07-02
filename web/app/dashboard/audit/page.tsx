@@ -185,7 +185,7 @@ export default function AuditPage() {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Audit Runs</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Scan invoice lines for overcharged indirect tax and generate recoverable findings.
           </p>
         </div>
@@ -194,12 +194,12 @@ export default function AuditPage() {
       <Card className="p-5">
         <div className="flex flex-wrap items-end gap-4">
           <label className="block min-w-[260px] flex-1">
-            <span className="mb-1 block text-xs font-medium text-slate-400">Audit scope</span>
+            <span className="mb-1 block text-xs font-medium text-neutral-400">Audit scope</span>
             <select
               value={scope}
               onChange={(e) => setScope(e.target.value)}
               disabled={running}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
             >
               {SCOPES.map((s) => (
                 <option key={s.value} value={s.value}>
@@ -214,10 +214,10 @@ export default function AuditPage() {
         </div>
         {runErr && <p className="mt-3 text-sm text-rose-300">{runErr}</p>}
         {lastResult && (
-          <div className="mt-4 rounded-lg border border-teal-800/60 bg-teal-950/20 p-4 text-sm text-teal-200">
+          <div className="mt-4 rounded-lg border border-orange-800/60 bg-orange-950/20 p-4 text-sm text-orange-200">
             Audit complete — scanned <strong>{lastResult.run?.lines_scanned ?? 0}</strong> lines, found{' '}
             <strong>{lastResult.findings_count}</strong> findings worth{' '}
-            <strong className="text-teal-300">{fmtUsd(lastResult.total_recoverable_cents)}</strong> recoverable.
+            <strong className="text-orange-300">{fmtUsd(lastResult.total_recoverable_cents)}</strong> recoverable.
           </div>
         )}
       </Card>
@@ -230,25 +230,25 @@ export default function AuditPage() {
       </div>
 
       <Card className="p-5">
-        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-400">
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-neutral-400">
           Recoverable per Run
         </h2>
         {runs.length === 0 ? (
-          <p className="text-sm text-slate-500">No runs to chart yet.</p>
+          <p className="text-sm text-neutral-500">No runs to chart yet.</p>
         ) : (
           <div className="space-y-2">
             {runs.slice(0, 10).map((r) => (
               <div key={r.id} className="flex items-center gap-3">
-                <span className="w-32 shrink-0 truncate text-xs text-slate-500">{fmtDate(r.created_at)}</span>
-                <div className="h-5 flex-1 overflow-hidden rounded bg-slate-800">
+                <span className="w-32 shrink-0 truncate text-xs text-neutral-500">{fmtDate(r.created_at)}</span>
+                <div className="h-5 flex-1 overflow-hidden rounded bg-neutral-800">
                   <div
-                    className="h-full rounded bg-gradient-to-r from-teal-600 to-teal-400"
+                    className="h-full rounded bg-gradient-to-r from-orange-600 to-orange-400"
                     style={{
                       width: `${Math.max(2, ((r.total_recoverable_cents || 0) / maxRecoverable) * 100)}%`,
                     }}
                   />
                 </div>
-                <span className="w-24 shrink-0 text-right text-xs tabular-nums text-teal-300">
+                <span className="w-24 shrink-0 text-right text-xs tabular-nums text-orange-300">
                   {fmtUsd(r.total_recoverable_cents)}
                 </span>
               </div>
@@ -258,7 +258,7 @@ export default function AuditPage() {
       </Card>
 
       <div>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-400">Run History</h2>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-neutral-400">Run History</h2>
         {loading ? (
           <div className="py-16">
             <Spinner label="Loading audit runs…" />
@@ -296,14 +296,14 @@ export default function AuditPage() {
             <TBody>
               {runs.map((r) => (
                 <TR key={r.id}>
-                  <TD className="whitespace-nowrap text-slate-200">{fmtDate(r.created_at)}</TD>
+                  <TD className="whitespace-nowrap text-neutral-200">{fmtDate(r.created_at)}</TD>
                   <TD className="capitalize">{r.scope ?? 'full'}</TD>
                   <TD>
                     <Badge tone={statusTone(r.status)}>{r.status || 'unknown'}</Badge>
                   </TD>
                   <TD className="text-right tabular-nums">{(r.lines_scanned || 0).toLocaleString()}</TD>
                   <TD className="text-right tabular-nums">{(r.findings_count || 0).toLocaleString()}</TD>
-                  <TD className="text-right tabular-nums text-teal-300">{fmtUsd(r.total_recoverable_cents)}</TD>
+                  <TD className="text-right tabular-nums text-orange-300">{fmtUsd(r.total_recoverable_cents)}</TD>
                   <TD>
                     <div className="flex justify-end">
                       <Button variant="ghost" className="px-2 py-1 text-xs" onClick={() => openDetail(r.id)}>
@@ -324,44 +324,44 @@ export default function AuditPage() {
             <Spinner label="Loading run…" />
           </div>
         ) : !detail ? (
-          <p className="text-sm text-slate-500">Could not load this run.</p>
+          <p className="text-sm text-neutral-500">Could not load this run.</p>
         ) : (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs text-slate-500">{detail.id}</span>
+              <span className="font-mono text-xs text-neutral-500">{detail.id}</span>
               <Badge tone={statusTone(detail.status)}>{detail.status}</Badge>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <div className="rounded-lg border border-slate-800 bg-slate-950 p-3">
-                <div className="text-xs uppercase text-slate-500">Scope</div>
-                <div className="mt-1 capitalize text-slate-200">{detail.scope ?? 'full'}</div>
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950 p-3">
+                <div className="text-xs uppercase text-neutral-500">Scope</div>
+                <div className="mt-1 capitalize text-neutral-200">{detail.scope ?? 'full'}</div>
               </div>
-              <div className="rounded-lg border border-slate-800 bg-slate-950 p-3">
-                <div className="text-xs uppercase text-slate-500">Run at</div>
-                <div className="mt-1 text-slate-200">{fmtDate(detail.created_at)}</div>
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950 p-3">
+                <div className="text-xs uppercase text-neutral-500">Run at</div>
+                <div className="mt-1 text-neutral-200">{fmtDate(detail.created_at)}</div>
               </div>
-              <div className="rounded-lg border border-slate-800 bg-slate-950 p-3">
-                <div className="text-xs uppercase text-slate-500">Lines scanned</div>
-                <div className="mt-1 tabular-nums text-slate-200">
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950 p-3">
+                <div className="text-xs uppercase text-neutral-500">Lines scanned</div>
+                <div className="mt-1 tabular-nums text-neutral-200">
                   {(detail.lines_scanned || 0).toLocaleString()}
                 </div>
               </div>
-              <div className="rounded-lg border border-slate-800 bg-slate-950 p-3">
-                <div className="text-xs uppercase text-slate-500">Findings</div>
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950 p-3">
+                <div className="text-xs uppercase text-neutral-500">Findings</div>
                 <div className="mt-1 tabular-nums text-amber-300">
                   {(detail.findings_count || 0).toLocaleString()}
                 </div>
               </div>
-              <div className="col-span-2 rounded-lg border border-teal-800/60 bg-teal-950/20 p-3">
-                <div className="text-xs uppercase text-teal-400">Total recoverable</div>
-                <div className="mt-1 text-xl font-bold tabular-nums text-teal-300">
+              <div className="col-span-2 rounded-lg border border-orange-800/60 bg-orange-950/20 p-3">
+                <div className="text-xs uppercase text-orange-400">Total recoverable</div>
+                <div className="mt-1 text-xl font-bold tabular-nums text-orange-300">
                   {fmtUsd(detail.total_recoverable_cents)}
                 </div>
               </div>
             </div>
             <a
               href="/dashboard/findings"
-              className="block text-center text-sm font-medium text-teal-400 hover:text-teal-300"
+              className="block text-center text-sm font-medium text-orange-400 hover:text-orange-300"
             >
               View findings from this scan →
             </a>

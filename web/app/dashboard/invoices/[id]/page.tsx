@@ -201,7 +201,7 @@ export default function InvoiceDetailPage() {
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/dashboard/invoices" className="text-sm text-slate-500 hover:text-slate-300">
+        <Link href="/dashboard/invoices" className="text-sm text-neutral-500 hover:text-neutral-300">
           ← Invoices
         </Link>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
@@ -209,7 +209,7 @@ export default function InvoiceDetailPage() {
             <h1 className="text-2xl font-bold text-white">
               Invoice {invoice.invoice_number || invoice.id.slice(0, 8)}
             </h1>
-            <p className="mt-1 text-sm text-slate-400">
+            <p className="mt-1 text-sm text-neutral-400">
               {invoice.invoice_date ? new Date(invoice.invoice_date).toLocaleDateString() : 'No date'}
               {' · '}
               Ship-to {[invoice.ship_to_city, invoice.ship_to_county, invoice.ship_to_state].filter(Boolean).join(', ') || 'unknown'}
@@ -238,9 +238,9 @@ export default function InvoiceDetailPage() {
 
       {/* Line-level audit results */}
       <Card className="p-0">
-        <div className="flex items-center justify-between border-b border-slate-800 px-5 py-4">
+        <div className="flex items-center justify-between border-b border-neutral-800 px-5 py-4">
           <h2 className="text-base font-semibold text-white">Line-Level Audit Results</h2>
-          <span className="text-sm text-slate-500">{money(totals.recoverable)} recoverable across this invoice</span>
+          <span className="text-sm text-neutral-500">{money(totals.recoverable)} recoverable across this invoice</span>
         </div>
         {lines.length === 0 ? (
           <div className="p-6">
@@ -268,10 +268,10 @@ export default function InvoiceDetailPage() {
             <TBody>
               {lines.map((l) => (
                 <TR key={l.id}>
-                  <TD className="text-slate-500">{l.line_number}</TD>
+                  <TD className="text-neutral-500">{l.line_number}</TD>
                   <TD className="max-w-xs">
-                    <div className="truncate font-medium text-slate-100">{l.description || '—'}</div>
-                    {l.gl_account && <div className="text-xs text-slate-600">GL {l.gl_account}</div>}
+                    <div className="truncate font-medium text-neutral-100">{l.description || '—'}</div>
+                    {l.gl_account && <div className="text-xs text-neutral-600">GL {l.gl_account}</div>}
                   </TD>
                   <TD>{categoryName(l.category_id)}</TD>
                   <TD>{l.jurisdiction_charged || '—'}</TD>
@@ -281,14 +281,14 @@ export default function InvoiceDetailPage() {
                   <TD>
                     <div className="space-y-1">
                       <Badge tone={resultTone(l.audit_result)}>{l.audit_result || 'unaudited'}</Badge>
-                      {l.audit_reason && <div className="max-w-[14rem] text-xs text-slate-500">{l.audit_reason}</div>}
+                      {l.audit_reason && <div className="max-w-[14rem] text-xs text-neutral-500">{l.audit_reason}</div>}
                     </div>
                   </TD>
-                  <TD className={`text-right font-medium tabular-nums ${(l.recoverable_cents ?? 0) > 0 ? 'text-rose-300' : 'text-slate-400'}`}>
+                  <TD className={`text-right font-medium tabular-nums ${(l.recoverable_cents ?? 0) > 0 ? 'text-rose-300' : 'text-neutral-400'}`}>
                     {money(l.recoverable_cents)}
                   </TD>
                   <TD>
-                    <button onClick={() => openEdit(l)} className="text-sm text-teal-400 hover:text-teal-300">
+                    <button onClick={() => openEdit(l)} className="text-sm text-orange-400 hover:text-orange-300">
                       Edit
                     </button>
                   </TD>
@@ -316,9 +316,9 @@ export default function InvoiceDetailPage() {
         {editLine && (
           <form id="line-form" onSubmit={saveLine} className="space-y-4">
             {editError && <p className="rounded-lg bg-rose-950 px-3 py-2 text-sm text-rose-300">{editError}</p>}
-            <p className="text-sm text-slate-400">{editLine.description || 'Line item'}</p>
+            <p className="text-sm text-neutral-400">{editLine.description || 'Line item'}</p>
             <label className="block">
-              <span className="mb-1 block text-xs font-medium text-slate-400">Category</span>
+              <span className="mb-1 block text-xs font-medium text-neutral-400">Category</span>
               <select value={editCategory} onChange={(e) => setEditCategory(e.target.value)} className={inputClass}>
                 <option value="">— Uncategorized —</option>
                 {categories.map((c) => (
@@ -329,7 +329,7 @@ export default function InvoiceDetailPage() {
               </select>
             </label>
             <label className="block">
-              <span className="mb-1 block text-xs font-medium text-slate-400">Audit Result (taxability override)</span>
+              <span className="mb-1 block text-xs font-medium text-neutral-400">Audit Result (taxability override)</span>
               <select value={editResult} onChange={(e) => setEditResult(e.target.value)} className={inputClass}>
                 <option value="">— Unaudited —</option>
                 <option value="correct">Correct</option>
@@ -339,7 +339,7 @@ export default function InvoiceDetailPage() {
               </select>
             </label>
             <label className="block">
-              <span className="mb-1 block text-xs font-medium text-slate-400">Reason / Note</span>
+              <span className="mb-1 block text-xs font-medium text-neutral-400">Reason / Note</span>
               <textarea
                 value={editReason}
                 onChange={(e) => setEditReason(e.target.value)}
@@ -356,4 +356,4 @@ export default function InvoiceDetailPage() {
 }
 
 const inputClass =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-teal-500 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-orange-500 focus:outline-none'

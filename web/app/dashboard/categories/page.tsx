@@ -280,7 +280,7 @@ export default function CategoriesPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-white">Product Categories &amp; Taxability</h1>
-          <p className="mt-1 text-sm text-slate-400">Catalog of product/service categories and their per-state taxability treatment.</p>
+          <p className="mt-1 text-sm text-neutral-400">Catalog of product/service categories and their per-state taxability treatment.</p>
         </div>
         <div className="flex gap-2">
           <Button variant="secondary" onClick={() => openCreateRule()} disabled={categories.length === 0}>+ Taxability Rule</Button>
@@ -299,10 +299,10 @@ export default function CategoriesPage() {
       {/* controls */}
       <Card className="p-4">
         <div className="flex flex-wrap items-center gap-3">
-          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search categories…" className="min-w-[200px] flex-1 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500" />
-          <div className="inline-flex overflow-hidden rounded-lg border border-slate-700">
-            <button onClick={() => setView('matrix')} className={`px-3 py-2 text-sm ${view === 'matrix' ? 'bg-teal-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>Matrix</button>
-            <button onClick={() => setView('list')} className={`px-3 py-2 text-sm ${view === 'list' ? 'bg-teal-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>List</button>
+          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search categories…" className="min-w-[200px] flex-1 rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-orange-500" />
+          <div className="inline-flex overflow-hidden rounded-lg border border-neutral-700">
+            <button onClick={() => setView('matrix')} className={`px-3 py-2 text-sm ${view === 'matrix' ? 'bg-orange-600 text-white' : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'}`}>Matrix</button>
+            <button onClick={() => setView('list')} className={`px-3 py-2 text-sm ${view === 'list' ? 'bg-orange-600 text-white' : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'}`}>List</button>
           </div>
         </div>
       </Card>
@@ -316,30 +316,30 @@ export default function CategoriesPage() {
         />
       ) : view === 'matrix' ? (
         <Card className="p-0">
-          <div className="flex items-center justify-between border-b border-slate-800 px-4 py-3">
+          <div className="flex items-center justify-between border-b border-neutral-800 px-4 py-3">
             <h2 className="text-sm font-semibold text-white">Taxability Matrix</h2>
             <div className="flex flex-wrap items-center gap-2 text-xs">
               <Legend tone="rose" label="Taxable" />
               <Legend tone="green" label="Exempt" />
               <Legend tone="amber" label="Reduced" />
               <Legend tone="blue" label="Zero-rated" />
-              <span className="text-slate-600">· click a cell to set</span>
+              <span className="text-neutral-600">· click a cell to set</span>
             </div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-900/80 text-xs uppercase tracking-wide text-slate-500">
+              <thead className="bg-neutral-900/80 text-xs uppercase tracking-wide text-neutral-500">
                 <tr>
-                  <th className="sticky left-0 z-10 bg-slate-900/80 px-4 py-3 font-medium">Category</th>
+                  <th className="sticky left-0 z-10 bg-neutral-900/80 px-4 py-3 font-medium">Category</th>
                   {MATRIX_STATES.map((s) => <th key={s} className="px-2 py-3 text-center font-medium">{s}</th>)}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800">
+              <tbody className="divide-y divide-neutral-800">
                 {filteredCats.map((c) => (
-                  <tr key={c.id} className="hover:bg-slate-900/40">
-                    <td className="sticky left-0 z-10 bg-slate-950/90 px-4 py-2">
-                      <div className="font-medium text-slate-100">{c.name}</div>
-                      {c.code && <div className="text-xs text-slate-500">{c.code}</div>}
+                  <tr key={c.id} className="hover:bg-neutral-900/40">
+                    <td className="sticky left-0 z-10 bg-neutral-950/90 px-4 py-2">
+                      <div className="font-medium text-neutral-100">{c.name}</div>
+                      {c.code && <div className="text-xs text-neutral-500">{c.code}</div>}
                     </td>
                     {MATRIX_STATES.map((s) => {
                       const r = ruleIndex.get(`${c.id}:${s}`)
@@ -354,7 +354,7 @@ export default function CategoriesPage() {
                                 : r.taxability === 'exempt' ? 'bg-emerald-950 text-emerald-300 hover:bg-emerald-900 border border-emerald-800'
                                 : r.taxability === 'reduced' ? 'bg-amber-950 text-amber-300 hover:bg-amber-900 border border-amber-800'
                                 : 'bg-sky-950 text-sky-300 hover:bg-sky-900 border border-sky-800'
-                                : 'border border-dashed border-slate-700 text-slate-600 hover:border-teal-600 hover:text-teal-400'
+                                : 'border border-dashed border-neutral-700 text-neutral-600 hover:border-orange-600 hover:text-orange-400'
                             }`}
                           >
                             {r ? taxShort(r.taxability) : '+'}
@@ -367,7 +367,7 @@ export default function CategoriesPage() {
               </tbody>
             </table>
           </div>
-          <p className="border-t border-slate-800 px-4 py-2 text-xs text-slate-600">
+          <p className="border-t border-neutral-800 px-4 py-2 text-xs text-neutral-600">
             Matrix shows {MATRIX_STATES.length} common nexus states. Use the List view to manage rules for any state.
           </p>
         </Card>
@@ -383,7 +383,7 @@ export default function CategoriesPage() {
                       <h3 className="text-base font-semibold text-white">{c.name}</h3>
                       {c.code && <Badge tone="slate">{c.code}</Badge>}
                     </div>
-                    {c.description && <p className="mt-1 max-w-2xl text-sm text-slate-400">{c.description}</p>}
+                    {c.description && <p className="mt-1 max-w-2xl text-sm text-neutral-400">{c.description}</p>}
                   </div>
                   <div className="flex gap-2">
                     <Button variant="ghost" className="px-2 py-1" onClick={() => openCreateRule(c.id)}>+ Rule</Button>
@@ -393,7 +393,7 @@ export default function CategoriesPage() {
                 </div>
                 <div className="mt-4">
                   {catRules.length === 0 ? (
-                    <p className="rounded-lg border border-dashed border-slate-800 px-3 py-4 text-center text-sm text-slate-500">No taxability rules. Defaults to fully taxable until configured.</p>
+                    <p className="rounded-lg border border-dashed border-neutral-800 px-3 py-4 text-center text-sm text-neutral-500">No taxability rules. Defaults to fully taxable until configured.</p>
                   ) : (
                     <Table>
                       <THead>
@@ -402,10 +402,10 @@ export default function CategoriesPage() {
                       <TBody>
                         {catRules.map((r) => (
                           <TR key={r.id}>
-                            <TD className="font-medium text-slate-100">{r.state}</TD>
+                            <TD className="font-medium text-neutral-100">{r.state}</TD>
                             <TD><Badge tone={taxTone(r.taxability)}>{r.taxability}</Badge></TD>
                             <TD>{r.reduced_rate != null ? (r.reduced_rate <= 1 ? `${(r.reduced_rate * 100).toFixed(3)}%` : `${r.reduced_rate}`) : '—'}</TD>
-                            <TD className="text-slate-400">{r.note || '—'}</TD>
+                            <TD className="text-neutral-400">{r.note || '—'}</TD>
                             <TD className="text-right">
                               <div className="flex justify-end gap-2">
                                 <Button variant="ghost" className="px-2 py-1" onClick={() => openEditRule(r)}>Edit</Button>
@@ -469,7 +469,7 @@ export default function CategoriesPage() {
           )}
           <Field label="Note"><textarea value={ruleForm.note} onChange={(e) => setRuleForm({ ...ruleForm, note: e.target.value })} className={inputCls} rows={2} /></Field>
           {editingRule && (
-            <p className="text-xs text-slate-500">Category and state are fixed for an existing rule (unique per category+state). Delete and recreate to move it.</p>
+            <p className="text-xs text-neutral-500">Category and state are fixed for an existing rule (unique per category+state). Delete and recreate to move it.</p>
           )}
         </form>
         <div className="mt-5 flex justify-between gap-3">
@@ -488,12 +488,12 @@ export default function CategoriesPage() {
   )
 }
 
-const inputCls = 'w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500'
+const inputCls = 'w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-orange-500'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium text-slate-400">{label}</span>
+      <span className="mb-1 block text-xs font-medium text-neutral-400">{label}</span>
       {children}
     </label>
   )
@@ -501,5 +501,5 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 function Legend({ tone, label }: { tone: 'rose' | 'green' | 'amber' | 'blue'; label: string }) {
   const dot = tone === 'rose' ? 'bg-rose-500' : tone === 'green' ? 'bg-emerald-500' : tone === 'amber' ? 'bg-amber-500' : 'bg-sky-500'
-  return <span className="inline-flex items-center gap-1 text-slate-400"><span className={`h-2.5 w-2.5 rounded-sm ${dot}`} />{label}</span>
+  return <span className="inline-flex items-center gap-1 text-neutral-400"><span className={`h-2.5 w-2.5 rounded-sm ${dot}`} />{label}</span>
 }

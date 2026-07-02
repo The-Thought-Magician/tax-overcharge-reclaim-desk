@@ -245,7 +245,7 @@ export default function VendorDetailPage() {
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/dashboard/vendors" className="text-sm text-slate-500 hover:text-slate-300">
+        <Link href="/dashboard/vendors" className="text-sm text-neutral-500 hover:text-neutral-300">
           ← Vendors
         </Link>
       </div>
@@ -256,14 +256,14 @@ export default function VendorDetailPage() {
             <h1 className="text-2xl font-bold tracking-tight text-white">{vendor.name}</h1>
             <Badge tone={risk.tone}>Risk {risk.label} · {Math.round((vendor.risk_score ?? 0) * 100)}%</Badge>
           </div>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             {vendor.dba && <span>dba {vendor.dba} · </span>}
             {vendor.default_state || 'No state'} ·{' '}
             <span className="capitalize">{vendor.default_taxability || 'unknown'}</span>
             {vendor.tax_id && <span className="font-mono"> · {vendor.tax_id}</span>}
           </p>
           {(vendor.contact_name || vendor.contact_email) && (
-            <p className="mt-0.5 text-sm text-slate-500">
+            <p className="mt-0.5 text-sm text-neutral-500">
               {vendor.contact_name}
               {vendor.contact_name && vendor.contact_email ? ' · ' : ''}
               {vendor.contact_email}
@@ -282,7 +282,7 @@ export default function VendorDetailPage() {
 
       {vendor.aliases && vendor.aliases.length > 0 && (
         <Card className="p-4">
-          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-slate-500">Aliases</div>
+          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-neutral-500">Aliases</div>
           <div className="flex flex-wrap gap-2">
             {vendor.aliases.map((a) => (
               <Badge key={a} tone="slate">{a}</Badge>
@@ -293,15 +293,15 @@ export default function VendorDetailPage() {
 
       {vendor.notes && (
         <Card className="p-4">
-          <div className="mb-1 text-xs font-medium uppercase tracking-wide text-slate-500">Notes</div>
-          <p className="text-sm text-slate-300 whitespace-pre-wrap">{vendor.notes}</p>
+          <div className="mb-1 text-xs font-medium uppercase tracking-wide text-neutral-500">Notes</div>
+          <p className="text-sm text-neutral-300 whitespace-pre-wrap">{vendor.notes}</p>
         </Card>
       )}
 
       <Card className="p-5">
         <h2 className="mb-4 text-sm font-semibold text-white">Overcharge by Type</h2>
         {byType.rows.length === 0 ? (
-          <p className="text-sm text-slate-500">No findings recorded for this vendor.</p>
+          <p className="text-sm text-neutral-500">No findings recorded for this vendor.</p>
         ) : (
           <div className="space-y-3">
             {byType.rows.map((r) => (
@@ -309,13 +309,13 @@ export default function VendorDetailPage() {
                 <div className="mb-1 flex items-center justify-between text-sm">
                   <span className="flex items-center gap-2">
                     <Badge tone={findingTone[r.type] || 'slate'}>{r.type.replace(/_/g, ' ')}</Badge>
-                    <span className="text-slate-500">{r.count} finding{r.count === 1 ? '' : 's'}</span>
+                    <span className="text-neutral-500">{r.count} finding{r.count === 1 ? '' : 's'}</span>
                   </span>
-                  <span className="tabular-nums font-medium text-slate-200">{fmtMoney(r.cents)}</span>
+                  <span className="tabular-nums font-medium text-neutral-200">{fmtMoney(r.cents)}</span>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800">
+                <div className="h-2 w-full overflow-hidden rounded-full bg-neutral-800">
                   <div
-                    className="h-full rounded-full bg-teal-500"
+                    className="h-full rounded-full bg-orange-500"
                     style={{ width: `${byType.max ? Math.max(4, (r.cents / byType.max) * 100) : 0}%` }}
                   />
                 </div>
@@ -348,8 +348,8 @@ export default function VendorDetailPage() {
                 .map((f) => (
                   <TR key={f.id}>
                     <TD><Badge tone={findingTone[f.type] || 'slate'}>{f.type.replace(/_/g, ' ')}</Badge></TD>
-                    <TD>{f.jurisdiction || <span className="text-slate-600">—</span>}</TD>
-                    <TD className="max-w-xs truncate text-slate-400">{f.reason || '—'}</TD>
+                    <TD>{f.jurisdiction || <span className="text-neutral-600">—</span>}</TD>
+                    <TD className="max-w-xs truncate text-neutral-400">{f.reason || '—'}</TD>
                     <TD>{fmtDate(f.transaction_date)}</TD>
                     <TD><Badge tone={statusTone[f.status || ''] || 'slate'}>{(f.status || 'open').replace(/_/g, ' ')}</Badge></TD>
                     <TD className="text-right tabular-nums font-medium text-amber-300">{fmtMoney(f.recoverable_cents)}</TD>
@@ -381,16 +381,16 @@ export default function VendorDetailPage() {
               {invoices.map((iv) => (
                 <TR key={iv.id}>
                   <TD>
-                    <Link href={`/dashboard/invoices/${iv.id}`} className="font-medium text-teal-300 hover:text-teal-200">
+                    <Link href={`/dashboard/invoices/${iv.id}`} className="font-medium text-orange-300 hover:text-orange-200">
                       {iv.invoice_number || iv.id.slice(0, 8)}
                     </Link>
                   </TD>
                   <TD>{fmtDate(iv.invoice_date)}</TD>
-                  <TD>{iv.ship_to_state || <span className="text-slate-600">—</span>}</TD>
+                  <TD>{iv.ship_to_state || <span className="text-neutral-600">—</span>}</TD>
                   <TD><Badge tone="slate">{iv.status || 'pending'}</Badge></TD>
                   <TD className="text-right tabular-nums">{fmtMoney(iv.subtotal_cents)}</TD>
                   <TD className="text-right tabular-nums">{fmtMoney(iv.tax_cents)}</TD>
-                  <TD className="text-right tabular-nums font-medium text-slate-200">{fmtMoney(iv.total_cents)}</TD>
+                  <TD className="text-right tabular-nums font-medium text-neutral-200">{fmtMoney(iv.total_cents)}</TD>
                 </TR>
               ))}
             </TBody>
@@ -474,7 +474,7 @@ export default function VendorDetailPage() {
 }
 
 const inputCls =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-teal-500 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-orange-500 focus:outline-none'
 
 function Field({
   label,
@@ -489,10 +489,10 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium text-slate-400">
+      <span className="mb-1 block text-xs font-medium text-neutral-400">
         {label}
         {required && <span className="text-rose-400"> *</span>}
-        {hint && <span className="ml-1 text-slate-600">({hint})</span>}
+        {hint && <span className="ml-1 text-neutral-600">({hint})</span>}
       </span>
       {children}
     </label>

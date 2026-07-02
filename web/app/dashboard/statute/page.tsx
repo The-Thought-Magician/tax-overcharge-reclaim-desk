@@ -237,7 +237,7 @@ export default function StatutePage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Statute Clock</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Statute-of-limitations rules per state and the refund findings approaching their filing deadline.
           </p>
         </div>
@@ -260,23 +260,23 @@ export default function StatutePage() {
       {/* Deadline timeline / calendar */}
       <Card className="p-5">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-400">
             Deadline Calendar
           </h2>
-          <span className="text-xs text-slate-500">Recoverable value by deadline month</span>
+          <span className="text-xs text-neutral-500">Recoverable value by deadline month</span>
         </div>
         {byMonth.length === 0 ? (
-          <p className="py-6 text-center text-sm text-slate-500">No upcoming statute deadlines in the window.</p>
+          <p className="py-6 text-center text-sm text-neutral-500">No upcoming statute deadlines in the window.</p>
         ) : (
           <div className="space-y-3">
             {byMonth.map((m) => {
               const tone = urgencyTone(m.minDays)
               const barColor =
-                tone === 'rose' ? 'bg-rose-500' : tone === 'amber' ? 'bg-amber-500' : 'bg-teal-500'
+                tone === 'rose' ? 'bg-rose-500' : tone === 'amber' ? 'bg-amber-500' : 'bg-orange-500'
               return (
                 <div key={m.key} className="flex items-center gap-3">
-                  <div className="w-24 shrink-0 text-sm font-medium text-slate-300">{m.label}</div>
-                  <div className="relative h-7 flex-1 overflow-hidden rounded bg-slate-800">
+                  <div className="w-24 shrink-0 text-sm font-medium text-neutral-300">{m.label}</div>
+                  <div className="relative h-7 flex-1 overflow-hidden rounded bg-neutral-800">
                     <div
                       className={`h-full ${barColor} transition-all`}
                       style={{ width: `${Math.max(6, (m.cents / maxMonthCents) * 100)}%` }}
@@ -294,7 +294,7 @@ export default function StatutePage() {
 
       {/* SOL rules */}
       <div>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-400">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-neutral-400">
           Statute-of-Limitations Rules
         </h2>
         {rules.length === 0 ? (
@@ -321,8 +321,8 @@ export default function StatutePage() {
                     <Badge tone="teal">{r.state}</Badge>
                   </TD>
                   <TD className="tabular-nums">{r.window_months} months</TD>
-                  <TD className="text-slate-400">{r.basis || '—'}</TD>
-                  <TD className="max-w-xs truncate text-slate-400">{r.note || '—'}</TD>
+                  <TD className="text-neutral-400">{r.basis || '—'}</TD>
+                  <TD className="max-w-xs truncate text-neutral-400">{r.note || '—'}</TD>
                   <TD className="text-right">
                     <Button variant="ghost" onClick={() => openEdit(r)}>
                       Edit
@@ -338,19 +338,19 @@ export default function StatutePage() {
       {/* Expiring queue */}
       <div>
         <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-400">
             Expiring Findings Queue
           </h2>
           <div className="flex items-center gap-2 text-sm">
-            <span className="text-slate-500">Window:</span>
+            <span className="text-neutral-500">Window:</span>
             {[30, 60, 90, 180].map((d) => (
               <button
                 key={d}
                 onClick={() => setWindowDays(d)}
                 className={`rounded-lg px-3 py-1 text-xs font-medium transition-colors ${
                   windowDays === d
-                    ? 'bg-teal-600 text-white'
-                    : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                    ? 'bg-orange-600 text-white'
+                    : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700'
                 }`}
               >
                 {d}d
@@ -392,12 +392,12 @@ export default function StatutePage() {
                       <Badge tone={tone}>{d === null ? '—' : `${d}d`}</Badge>
                     </TD>
                     <TD className="capitalize">{f.type.replace(/_/g, ' ')}</TD>
-                    <TD className="text-slate-400">{f.jurisdiction || '—'}</TD>
-                    <TD className="text-right font-medium tabular-nums text-teal-300">
+                    <TD className="text-neutral-400">{f.jurisdiction || '—'}</TD>
+                    <TD className="text-right font-medium tabular-nums text-orange-300">
                       {money(f.recoverable_cents || 0)}
                     </TD>
-                    <TD className="capitalize text-slate-400">{f.status}</TD>
-                    <TD className="max-w-xs truncate text-slate-400">{f.reason || '—'}</TD>
+                    <TD className="capitalize text-neutral-400">{f.status}</TD>
+                    <TD className="max-w-xs truncate text-neutral-400">{f.reason || '—'}</TD>
                   </TR>
                 )
               })}
@@ -428,14 +428,14 @@ export default function StatutePage() {
             </div>
           )}
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
               State
             </label>
             <select
               value={form.state}
               onChange={(e) => setForm({ ...form, state: e.target.value })}
               disabled={!!editing}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-teal-500 focus:outline-none disabled:opacity-60"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none disabled:opacity-60"
             >
               <option value="">Select state…</option>
               {US_STATES.map((s) => (
@@ -445,11 +445,11 @@ export default function StatutePage() {
               ))}
             </select>
             {editing && (
-              <p className="mt-1 text-xs text-slate-500">State cannot be changed; this upserts the existing rule.</p>
+              <p className="mt-1 text-xs text-neutral-500">State cannot be changed; this upserts the existing rule.</p>
             )}
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
               Filing Window (months)
             </label>
             <input
@@ -457,17 +457,17 @@ export default function StatutePage() {
               min={1}
               value={form.window_months}
               onChange={(e) => setForm({ ...form, window_months: Number(e.target.value) })}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
               Basis
             </label>
             <select
               value={form.basis}
               onChange={(e) => setForm({ ...form, basis: e.target.value })}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
             >
               <option value="transaction_date">Transaction date</option>
               <option value="invoice_date">Invoice date</option>
@@ -476,7 +476,7 @@ export default function StatutePage() {
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
               Note
             </label>
             <textarea
@@ -484,7 +484,7 @@ export default function StatutePage() {
               onChange={(e) => setForm({ ...form, note: e.target.value })}
               rows={3}
               placeholder="Optional citation or special handling notes…"
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
             />
           </div>
         </div>

@@ -195,7 +195,7 @@ export default function NotificationsPage() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-white">Notifications</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Statute deadlines, expiring certificates, and high-value findings.
           </p>
         </div>
@@ -216,13 +216,13 @@ export default function NotificationsPage() {
       </div>
 
       {/* Filters */}
-      <div className="inline-flex rounded-lg border border-slate-700 bg-slate-900 p-1">
+      <div className="inline-flex rounded-lg border border-neutral-700 bg-neutral-900 p-1">
         {(['all', 'unread', 'read'] as Filter[]).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
             className={`rounded-md px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
-              filter === f ? 'bg-teal-600 text-white' : 'text-slate-400 hover:text-white'
+              filter === f ? 'bg-orange-600 text-white' : 'text-neutral-400 hover:text-white'
             }`}
           >
             {f}
@@ -248,24 +248,24 @@ export default function NotificationsPage() {
             <Card
               key={n.id}
               className={`flex items-start gap-4 p-4 transition-colors ${
-                n.read ? 'opacity-70' : 'border-l-2 border-l-teal-500'
+                n.read ? 'opacity-70' : 'border-l-2 border-l-orange-500'
               }`}
             >
               {!n.read && (
-                <span className="mt-2 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-teal-400" />
+                <span className="mt-2 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-orange-400" />
               )}
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge tone={toneFor(n.type)}>{prettyType(n.type)}</Badge>
-                  <span className="text-sm font-semibold text-slate-100">{n.title}</span>
-                  <span className="ml-auto text-xs text-slate-500">{timeAgo(n.created_at)}</span>
+                  <span className="text-sm font-semibold text-neutral-100">{n.title}</span>
+                  <span className="ml-auto text-xs text-neutral-500">{timeAgo(n.created_at)}</span>
                 </div>
-                {n.body && <p className="mt-1 text-sm text-slate-400">{n.body}</p>}
+                {n.body && <p className="mt-1 text-sm text-neutral-400">{n.body}</p>}
                 <div className="mt-2 flex items-center gap-3">
                   {n.link && (
                     <Link
                       href={n.link}
-                      className="text-xs font-medium text-teal-400 hover:text-teal-300"
+                      className="text-xs font-medium text-orange-400 hover:text-orange-300"
                     >
                       View details →
                     </Link>
@@ -274,7 +274,7 @@ export default function NotificationsPage() {
                     <button
                       onClick={() => markRead(n.id)}
                       disabled={busyId === n.id}
-                      className="text-xs font-medium text-slate-500 hover:text-slate-300 disabled:opacity-50"
+                      className="text-xs font-medium text-neutral-500 hover:text-neutral-300 disabled:opacity-50"
                     >
                       {busyId === n.id ? 'Marking…' : 'Mark read'}
                     </button>

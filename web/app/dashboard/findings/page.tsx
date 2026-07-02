@@ -318,7 +318,7 @@ export default function FindingsPage() {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Findings Ledger</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Overcharge findings from audit runs. Triage through the recovery pipeline and bundle into claims.
           </p>
         </div>
@@ -343,12 +343,12 @@ export default function FindingsPage() {
 
       {/* Pipeline bar */}
       <Card className="p-4">
-        <div className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">Status Pipeline</div>
+        <div className="mb-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">Status Pipeline</div>
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setStatusFilter('')}
             className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
-              statusFilter === '' ? 'border-teal-600 bg-teal-600/15 text-teal-300' : 'border-slate-700 text-slate-400 hover:text-slate-200'
+              statusFilter === '' ? 'border-orange-600 bg-orange-600/15 text-orange-300' : 'border-neutral-700 text-neutral-400 hover:text-neutral-200'
             }`}
           >
             All ({stats.count})
@@ -359,8 +359,8 @@ export default function FindingsPage() {
               onClick={() => setStatusFilter(statusFilter === s ? '' : s)}
               className={`rounded-lg border px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
                 statusFilter === s
-                  ? 'border-teal-600 bg-teal-600/15 text-teal-300'
-                  : 'border-slate-700 text-slate-400 hover:text-slate-200'
+                  ? 'border-orange-600 bg-orange-600/15 text-orange-300'
+                  : 'border-neutral-700 text-neutral-400 hover:text-neutral-200'
               }`}
             >
               {s.replace('_', ' ')} ({stats.byStatus[s] || 0})
@@ -376,12 +376,12 @@ export default function FindingsPage() {
             placeholder="Search type, vendor, jurisdiction, reason…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="min-w-[220px] flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-teal-500 focus:outline-none"
+            className="min-w-[220px] flex-1 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-orange-500 focus:outline-none"
           />
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
           >
             <option value="">All types</option>
             {types.map((t) => (
@@ -395,8 +395,8 @@ export default function FindingsPage() {
 
       {/* Bulk action bar */}
       {selected.size > 0 && (
-        <Card className="flex flex-wrap items-center justify-between gap-3 border-teal-800/60 bg-teal-950/20 p-4">
-          <div className="text-sm text-teal-200">
+        <Card className="flex flex-wrap items-center justify-between gap-3 border-orange-800/60 bg-orange-950/20 p-4">
+          <div className="text-sm text-orange-200">
             <strong>{selected.size}</strong> selected — {fmtUsd(selectedTotal)} recoverable
           </div>
           <div className="flex flex-wrap gap-2">
@@ -465,7 +465,7 @@ export default function FindingsPage() {
                   checked={allChecked}
                   onChange={toggleAll}
                   aria-label="Select all"
-                  className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-teal-600"
+                  className="h-4 w-4 rounded border-neutral-600 bg-neutral-950 text-orange-600"
                 />
               </TH>
               <TH>Type</TH>
@@ -489,20 +489,20 @@ export default function FindingsPage() {
                       checked={selected.has(f.id)}
                       onChange={() => toggleSelect(f.id)}
                       aria-label={`Select finding ${f.id}`}
-                      className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-teal-600"
+                      className="h-4 w-4 rounded border-neutral-600 bg-neutral-950 text-orange-600"
                     />
                   </TD>
                   <TD>
                     <button
                       onClick={() => openDetail(f.id)}
-                      className="font-medium text-slate-200 hover:text-teal-300"
+                      className="font-medium text-neutral-200 hover:text-orange-300"
                     >
                       {f.type}
                     </button>
                   </TD>
                   <TD>{f.vendor_id ? vendors[f.vendor_id] ?? '—' : '—'}</TD>
                   <TD>{f.jurisdiction ?? '—'}</TD>
-                  <TD className="text-right tabular-nums text-teal-300">{fmtUsd(f.recoverable_cents)}</TD>
+                  <TD className="text-right tabular-nums text-orange-300">{fmtUsd(f.recoverable_cents)}</TD>
                   <TD className="text-right">
                     <Badge tone={confidenceTone(f.confidence)}>
                       {f.confidence != null ? `${Math.round(f.confidence * 100)}%` : '—'}
@@ -513,7 +513,7 @@ export default function FindingsPage() {
                       value={(f.status || 'new').toLowerCase()}
                       disabled={busy}
                       onChange={(e) => setStatus(f.id, e.target.value)}
-                      className={`rounded-md border border-slate-700 bg-slate-950 px-2 py-1 text-xs capitalize text-slate-200 focus:border-teal-500 focus:outline-none`}
+                      className={`rounded-md border border-neutral-700 bg-neutral-950 px-2 py-1 text-xs capitalize text-neutral-200 focus:border-orange-500 focus:outline-none`}
                     >
                       {PIPELINE.map((s) => (
                         <option key={s} value={s}>
@@ -522,7 +522,7 @@ export default function FindingsPage() {
                       ))}
                     </select>
                   </TD>
-                  <TD className="whitespace-nowrap text-slate-400">{fmtDate(f.statute_deadline)}</TD>
+                  <TD className="whitespace-nowrap text-neutral-400">{fmtDate(f.statute_deadline)}</TD>
                   <TD>
                     <div className="flex justify-end gap-1">
                       <Button
@@ -552,7 +552,7 @@ export default function FindingsPage() {
             <Spinner label="Loading finding…" />
           </div>
         ) : !detail ? (
-          <p className="text-sm text-slate-500">Could not load this finding.</p>
+          <p className="text-sm text-neutral-500">Could not load this finding.</p>
         ) : (
           <div className="space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
@@ -560,50 +560,50 @@ export default function FindingsPage() {
               <Badge tone={statusTone(detail.status)}>{detail.status}</Badge>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
-              <div className="rounded-lg border border-slate-800 bg-slate-950 p-3">
-                <div className="text-xs uppercase text-slate-500">Recoverable</div>
-                <div className="mt-1 text-lg font-bold tabular-nums text-teal-300">
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950 p-3">
+                <div className="text-xs uppercase text-neutral-500">Recoverable</div>
+                <div className="mt-1 text-lg font-bold tabular-nums text-orange-300">
                   {fmtUsd(detail.recoverable_cents)}
                 </div>
               </div>
-              <div className="rounded-lg border border-slate-800 bg-slate-950 p-3">
-                <div className="text-xs uppercase text-slate-500">Confidence</div>
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950 p-3">
+                <div className="text-xs uppercase text-neutral-500">Confidence</div>
                 <div className="mt-1">
                   <Badge tone={confidenceTone(detail.confidence)}>
                     {detail.confidence != null ? `${Math.round(detail.confidence * 100)}%` : '—'}
                   </Badge>
                 </div>
               </div>
-              <div className="rounded-lg border border-slate-800 bg-slate-950 p-3">
-                <div className="text-xs uppercase text-slate-500">Vendor</div>
-                <div className="mt-1 text-slate-200">
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950 p-3">
+                <div className="text-xs uppercase text-neutral-500">Vendor</div>
+                <div className="mt-1 text-neutral-200">
                   {detail.vendor_id ? vendors[detail.vendor_id] ?? detail.vendor_id : '—'}
                 </div>
               </div>
-              <div className="rounded-lg border border-slate-800 bg-slate-950 p-3">
-                <div className="text-xs uppercase text-slate-500">Jurisdiction</div>
-                <div className="mt-1 text-slate-200">{detail.jurisdiction ?? '—'}</div>
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950 p-3">
+                <div className="text-xs uppercase text-neutral-500">Jurisdiction</div>
+                <div className="mt-1 text-neutral-200">{detail.jurisdiction ?? '—'}</div>
               </div>
-              <div className="rounded-lg border border-slate-800 bg-slate-950 p-3">
-                <div className="text-xs uppercase text-slate-500">Transaction date</div>
-                <div className="mt-1 text-slate-200">{fmtDate(detail.transaction_date)}</div>
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950 p-3">
+                <div className="text-xs uppercase text-neutral-500">Transaction date</div>
+                <div className="mt-1 text-neutral-200">{fmtDate(detail.transaction_date)}</div>
               </div>
-              <div className="rounded-lg border border-slate-800 bg-slate-950 p-3">
-                <div className="text-xs uppercase text-slate-500">Statute deadline</div>
-                <div className="mt-1 text-slate-200">{fmtDate(detail.statute_deadline)}</div>
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950 p-3">
+                <div className="text-xs uppercase text-neutral-500">Statute deadline</div>
+                <div className="mt-1 text-neutral-200">{fmtDate(detail.statute_deadline)}</div>
               </div>
             </div>
             {detail.reason && (
-              <div className="rounded-lg border border-slate-800 bg-slate-950 p-3">
-                <div className="text-xs uppercase text-slate-500">Reason</div>
-                <p className="mt-1 text-sm text-slate-300">{detail.reason}</p>
+              <div className="rounded-lg border border-neutral-800 bg-neutral-950 p-3">
+                <div className="text-xs uppercase text-neutral-500">Reason</div>
+                <p className="mt-1 text-sm text-neutral-300">{detail.reason}</p>
               </div>
             )}
             <div className="flex flex-wrap gap-2">
               <select
                 value={(detail.status || 'new').toLowerCase()}
                 onChange={(e) => setStatus(detail.id, e.target.value)}
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm capitalize text-slate-200 focus:border-teal-500 focus:outline-none"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm capitalize text-neutral-200 focus:border-orange-500 focus:outline-none"
               >
                 {PIPELINE.map((s) => (
                   <option key={s} value={s}>
@@ -652,17 +652,17 @@ export default function FindingsPage() {
               {claimErr}
             </div>
           )}
-          <p className="text-sm text-slate-400">
-            Bundling <strong className="text-slate-200">{selected.size}</strong> finding(s) worth{' '}
-            <strong className="text-teal-300">{fmtUsd(selectedTotal)}</strong> into a single claim.
+          <p className="text-sm text-neutral-400">
+            Bundling <strong className="text-neutral-200">{selected.size}</strong> finding(s) worth{' '}
+            <strong className="text-orange-300">{fmtUsd(selectedTotal)}</strong> into a single claim.
           </p>
           <div className="grid grid-cols-2 gap-4">
             <label className="block">
-              <span className="mb-1 block text-xs font-medium text-slate-400">Claim type</span>
+              <span className="mb-1 block text-xs font-medium text-neutral-400">Claim type</span>
               <select
                 value={claimForm.claim_type}
                 onChange={(e) => setClaimForm((f) => ({ ...f, claim_type: e.target.value }))}
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
               >
                 <option value="refund">Refund (jurisdiction)</option>
                 <option value="vendor_credit">Vendor credit</option>
@@ -670,31 +670,31 @@ export default function FindingsPage() {
               </select>
             </label>
             <label className="block">
-              <span className="mb-1 block text-xs font-medium text-slate-400">Jurisdiction</span>
+              <span className="mb-1 block text-xs font-medium text-neutral-400">Jurisdiction</span>
               <input
                 value={claimForm.jurisdiction}
                 onChange={(e) => setClaimForm((f) => ({ ...f, jurisdiction: e.target.value }))}
                 placeholder="e.g. CA"
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
               />
             </label>
           </div>
           <label className="block">
-            <span className="mb-1 block text-xs font-medium text-slate-400">Reference number</span>
+            <span className="mb-1 block text-xs font-medium text-neutral-400">Reference number</span>
             <input
               value={claimForm.reference_number}
               onChange={(e) => setClaimForm((f) => ({ ...f, reference_number: e.target.value }))}
               placeholder="optional"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-xs font-medium text-slate-400">Note</span>
+            <span className="mb-1 block text-xs font-medium text-neutral-400">Note</span>
             <textarea
               value={claimForm.note}
               onChange={(e) => setClaimForm((f) => ({ ...f, note: e.target.value }))}
               rows={2}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
             />
           </label>
         </div>

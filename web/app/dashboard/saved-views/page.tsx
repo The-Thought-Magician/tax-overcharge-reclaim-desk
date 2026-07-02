@@ -55,7 +55,7 @@ function entityTone(entity: string): 'teal' | 'green' | 'amber' | 'blue' | 'slat
 }
 
 const inputCls =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-teal-500 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-orange-500 focus:outline-none'
 
 const emptyForm = {
   name: '',
@@ -226,7 +226,7 @@ export default function SavedViewsPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-white">Saved Views</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Reusable filter presets across findings, claims, invoices, and reference data.
           </p>
         </div>
@@ -247,12 +247,12 @@ export default function SavedViewsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by name or entity…"
-            className="min-w-[220px] flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-teal-500 focus:outline-none"
+            className="min-w-[220px] flex-1 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-orange-500 focus:outline-none"
           />
           <select
             value={entityFilter}
             onChange={(e) => setEntityFilter(e.target.value)}
-            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
           >
             <option value="">All entities</option>
             {entities.map((en) => (
@@ -282,7 +282,7 @@ export default function SavedViewsPage() {
             <div key={entity} className="space-y-3">
               <div className="flex items-center gap-2">
                 <Badge tone={entityTone(entity)}>{entityMeta(entity).label}</Badge>
-                <span className="text-xs text-slate-500">{list.length} view{list.length === 1 ? '' : 's'}</span>
+                <span className="text-xs text-neutral-500">{list.length} view{list.length === 1 ? '' : 's'}</span>
               </div>
               <Table>
                 <THead>
@@ -300,7 +300,7 @@ export default function SavedViewsPage() {
                       <TD>
                         <button
                           onClick={() => setDetail(v)}
-                          className="font-medium text-teal-300 hover:text-teal-200"
+                          className="font-medium text-orange-300 hover:text-orange-200"
                         >
                           {v.name}
                         </button>
@@ -309,17 +309,17 @@ export default function SavedViewsPage() {
                         {filterCount(v) > 0 ? (
                           <Badge tone="slate">{filterCount(v)} filter{filterCount(v) === 1 ? '' : 's'}</Badge>
                         ) : (
-                          <span className="text-slate-600">no filters</span>
+                          <span className="text-neutral-600">no filters</span>
                         )}
                       </TD>
                       <TD>
                         {v.is_default ? (
                           <Badge tone="green">Default</Badge>
                         ) : (
-                          <span className="text-slate-600">—</span>
+                          <span className="text-neutral-600">—</span>
                         )}
                       </TD>
-                      <TD className="text-slate-400">
+                      <TD className="text-neutral-400">
                         {new Date(v.created_at).toLocaleDateString()}
                       </TD>
                       <TD className="text-right">
@@ -393,12 +393,12 @@ export default function SavedViewsPage() {
               className={`${inputCls} font-mono`}
             />
           </Field>
-          <label className="flex items-center gap-2 text-sm text-slate-300">
+          <label className="flex items-center gap-2 text-sm text-neutral-300">
             <input
               type="checkbox"
               checked={form.is_default}
               onChange={(e) => setForm({ ...form, is_default: e.target.checked })}
-              className="h-4 w-4 rounded border-slate-700 bg-slate-950 text-teal-600 focus:ring-teal-500"
+              className="h-4 w-4 rounded border-neutral-700 bg-neutral-950 text-orange-600 focus:ring-orange-500"
             />
             Set as default view for this entity
           </label>
@@ -431,13 +431,13 @@ export default function SavedViewsPage() {
             <div className="flex flex-wrap items-center gap-2">
               <Badge tone={entityTone(detail.entity)}>{entityMeta(detail.entity).label}</Badge>
               {detail.is_default && <Badge tone="green">Default</Badge>}
-              <span className="text-xs text-slate-500">
+              <span className="text-xs text-neutral-500">
                 Created {new Date(detail.created_at).toLocaleString()}
               </span>
             </div>
             <div>
-              <div className="mb-1 text-xs font-medium uppercase tracking-wide text-slate-500">Filters</div>
-              <pre className="max-h-64 overflow-auto rounded-lg border border-slate-800 bg-slate-950 p-3 text-xs text-slate-300">
+              <div className="mb-1 text-xs font-medium uppercase tracking-wide text-neutral-500">Filters</div>
+              <pre className="max-h-64 overflow-auto rounded-lg border border-neutral-800 bg-neutral-950 p-3 text-xs text-neutral-300">
                 {JSON.stringify(detail.filters ?? {}, null, 2)}
               </pre>
             </div>
@@ -461,10 +461,10 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium text-slate-400">
+      <span className="mb-1 block text-xs font-medium text-neutral-400">
         {label}
         {required && <span className="text-rose-400"> *</span>}
-        {hint && <span className="ml-1 text-slate-600">({hint})</span>}
+        {hint && <span className="ml-1 text-neutral-600">({hint})</span>}
       </span>
       {children}
     </label>

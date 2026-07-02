@@ -207,7 +207,7 @@ export default function ClaimsPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Refund Claims</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Track vendor and state refund claims from draft through recovery.
           </p>
         </div>
@@ -238,13 +238,13 @@ export default function ClaimsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search reference, vendor, jurisdiction…"
-            className="flex-1 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none"
+            className="flex-1 rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-orange-500 focus:outline-none"
           />
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={() => setStatusFilter('')}
               className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
-                statusFilter === '' ? 'bg-teal-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                statusFilter === '' ? 'bg-orange-600 text-white' : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700'
               }`}
             >
               All
@@ -254,7 +254,7 @@ export default function ClaimsPage() {
                 key={s}
                 onClick={() => setStatusFilter(s)}
                 className={`rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
-                  statusFilter === s ? 'bg-teal-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                  statusFilter === s ? 'bg-orange-600 text-white' : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700'
                 }`}
               >
                 {s.replace(/_/g, ' ')}
@@ -293,25 +293,25 @@ export default function ClaimsPage() {
             {filtered.map((c) => (
               <TR key={c.id}>
                 <TD className="font-medium text-white">{c.reference_number || c.id.slice(0, 8)}</TD>
-                <TD className="text-slate-300">{vendorName(c.vendor_id)}</TD>
-                <TD className="capitalize text-slate-400">{c.claim_type.replace(/_/g, ' ')}</TD>
-                <TD className="text-slate-400">{c.jurisdiction || '—'}</TD>
+                <TD className="text-neutral-300">{vendorName(c.vendor_id)}</TD>
+                <TD className="capitalize text-neutral-400">{c.claim_type.replace(/_/g, ' ')}</TD>
+                <TD className="text-neutral-400">{c.jurisdiction || '—'}</TD>
                 <TD>
                   <Badge tone={statusTone(c.status)} className="capitalize">
                     {c.status.replace(/_/g, ' ')}
                   </Badge>
                 </TD>
-                <TD className="text-right tabular-nums text-slate-300">{money(c.expected_cents)}</TD>
-                <TD className="text-right tabular-nums font-medium text-teal-300">
+                <TD className="text-right tabular-nums text-neutral-300">{money(c.expected_cents)}</TD>
+                <TD className="text-right tabular-nums font-medium text-orange-300">
                   {money(c.recovered_cents)}
                 </TD>
-                <TD className="text-slate-400">
+                <TD className="text-neutral-400">
                   {c.filed_at ? new Date(c.filed_at).toLocaleDateString('en-US') : '—'}
                 </TD>
                 <TD className="text-right">
                   <Link
                     href={`/dashboard/claims/${c.id}`}
-                    className="text-sm font-medium text-teal-400 hover:text-teal-300"
+                    className="text-sm font-medium text-orange-400 hover:text-orange-300"
                   >
                     Open →
                   </Link>
@@ -344,13 +344,13 @@ export default function ClaimsPage() {
             </div>
           )}
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
               Vendor
             </label>
             <select
               value={form.vendor_id}
               onChange={(e) => setForm({ ...form, vendor_id: e.target.value })}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
             >
               <option value="">No vendor (state / direct)</option>
               {vendors.map((v) => (
@@ -362,13 +362,13 @@ export default function ClaimsPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
                 Claim Type
               </label>
               <select
                 value={form.claim_type}
                 onChange={(e) => setForm({ ...form, claim_type: e.target.value })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm capitalize text-white focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm capitalize text-white focus:border-orange-500 focus:outline-none"
               >
                 {CLAIM_TYPES.map((t) => (
                   <option key={t} value={t}>
@@ -378,20 +378,20 @@ export default function ClaimsPage() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
                 Jurisdiction
               </label>
               <input
                 value={form.jurisdiction}
                 onChange={(e) => setForm({ ...form, jurisdiction: e.target.value })}
                 placeholder="e.g. CA, TX-Harris"
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-orange-500 focus:outline-none"
               />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
                 Expected Amount (USD)
               </label>
               <input
@@ -401,23 +401,23 @@ export default function ClaimsPage() {
                 value={form.expected_cents}
                 onChange={(e) => setForm({ ...form, expected_cents: e.target.value })}
                 placeholder="0.00"
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-orange-500 focus:outline-none"
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
                 Reference #
               </label>
               <input
                 value={form.reference_number}
                 onChange={(e) => setForm({ ...form, reference_number: e.target.value })}
                 placeholder="Optional"
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-orange-500 focus:outline-none"
               />
             </div>
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-400">
               Note
             </label>
             <textarea
@@ -425,10 +425,10 @@ export default function ClaimsPage() {
               onChange={(e) => setForm({ ...form, note: e.target.value })}
               rows={3}
               placeholder="Optional context for this claim…"
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white placeholder-neutral-500 focus:border-orange-500 focus:outline-none"
             />
           </div>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-neutral-500">
             Attach findings to this claim from the detail page after it is created.
           </p>
         </div>

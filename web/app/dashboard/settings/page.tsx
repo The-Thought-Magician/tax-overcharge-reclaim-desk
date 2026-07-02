@@ -65,7 +65,7 @@ interface LogEntry {
 }
 
 const inputCls =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-teal-500 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-orange-500 focus:outline-none'
 
 const MONTHS = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -402,7 +402,7 @@ export default function SettingsPage() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-white">Settings</h1>
-          <p className="mt-1 text-sm text-slate-400">Create your first workspace to begin auditing tax overcharges.</p>
+          <p className="mt-1 text-sm text-neutral-400">Create your first workspace to begin auditing tax overcharges.</p>
         </div>
         <EmptyState
           icon="🏢"
@@ -428,13 +428,13 @@ export default function SettingsPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-white">Settings</h1>
-          <p className="mt-1 text-sm text-slate-400">Workspace profile, members, sample data, billing, and audit trail.</p>
+          <p className="mt-1 text-sm text-neutral-400">Workspace profile, members, sample data, billing, and audit trail.</p>
         </div>
         <div className="flex items-center gap-3">
           <select
             value={workspaceId ?? ''}
             onChange={(e) => switchWorkspace(e.target.value)}
-            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
           >
             {workspaces.map((w) => (
               <option key={w.id} value={w.id}>{w.name}</option>
@@ -446,15 +446,15 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-1 border-b border-slate-800">
+      <div className="flex flex-wrap gap-1 border-b border-neutral-800">
         {TABS.map((t) => (
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
             className={`-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors ${
               tab === t.id
-                ? 'border-teal-500 text-teal-300'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'border-orange-500 text-orange-300'
+                : 'border-transparent text-neutral-400 hover:text-neutral-200'
             }`}
           >
             {t.label}
@@ -517,7 +517,7 @@ export default function SettingsPage() {
                 {savingProfile ? 'Saving…' : 'Save Profile'}
               </Button>
               {workspace && (
-                <span className="text-xs text-slate-500">
+                <span className="text-xs text-neutral-500">
                   Created {new Date(workspace.created_at).toLocaleDateString()} · ID {workspace.id}
                 </span>
               )}
@@ -557,7 +557,7 @@ export default function SettingsPage() {
                   <TR key={m.id}>
                     <TD className="font-mono text-xs">{m.user_id}</TD>
                     <TD><Badge tone={roleTone(m.role)} className="capitalize">{m.role}</Badge></TD>
-                    <TD className="text-slate-400">{new Date(m.created_at).toLocaleDateString()}</TD>
+                    <TD className="text-neutral-400">{new Date(m.created_at).toLocaleDateString()}</TD>
                   </TR>
                 ))}
               </TBody>
@@ -571,7 +571,7 @@ export default function SettingsPage() {
           <div className="max-w-2xl space-y-4">
             <div>
               <h2 className="text-lg font-semibold text-white">Seed Sample Data</h2>
-              <p className="mt-1 text-sm text-slate-400">
+              <p className="mt-1 text-sm text-neutral-400">
                 Populate this workspace with realistic demo data: vendors, invoices with line items,
                 jurisdictions and rates, product categories with taxability rules, exemption certificates,
                 statute-of-limitations rules, and use-tax entries. Run an audit afterward to generate findings.
@@ -627,7 +627,7 @@ export default function SettingsPage() {
                     </div>
                   )}
                   {billing.subscription?.current_period_end && (
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-neutral-400">
                       Current period ends {new Date(billing.subscription.current_period_end).toLocaleDateString()}.
                     </p>
                   )}
@@ -663,7 +663,7 @@ export default function SettingsPage() {
               value={activitySearch}
               onChange={(e) => setActivitySearch(e.target.value)}
               placeholder="Search action, entity, user…"
-              className="min-w-[240px] rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-teal-500 focus:outline-none"
+              className="min-w-[240px] rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-orange-500 focus:outline-none"
             />
           </div>
           {activityLoading ? (
@@ -692,20 +692,20 @@ export default function SettingsPage() {
               <TBody>
                 {filteredActivity.map((a) => (
                   <TR key={a.id}>
-                    <TD className="whitespace-nowrap text-slate-400">{new Date(a.created_at).toLocaleString()}</TD>
+                    <TD className="whitespace-nowrap text-neutral-400">{new Date(a.created_at).toLocaleString()}</TD>
                     <TD><Badge tone="teal">{a.action}</Badge></TD>
                     <TD>
-                      <span className="capitalize text-slate-300">{a.entity_type}</span>
-                      {a.entity_id && <div className="font-mono text-xs text-slate-600">{a.entity_id}</div>}
+                      <span className="capitalize text-neutral-300">{a.entity_type}</span>
+                      {a.entity_id && <div className="font-mono text-xs text-neutral-600">{a.entity_id}</div>}
                     </TD>
-                    <TD className="font-mono text-xs">{a.user_id || <span className="text-slate-600">system</span>}</TD>
+                    <TD className="font-mono text-xs">{a.user_id || <span className="text-neutral-600">system</span>}</TD>
                     <TD>
                       {a.detail && Object.keys(a.detail).length > 0 ? (
-                        <span className="font-mono text-xs text-slate-500">
+                        <span className="font-mono text-xs text-neutral-500">
                           {JSON.stringify(a.detail).slice(0, 80)}
                         </span>
                       ) : (
-                        <span className="text-slate-600">—</span>
+                        <span className="text-neutral-600">—</span>
                       )}
                     </TD>
                   </TR>
@@ -843,10 +843,10 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium text-slate-400">
+      <span className="mb-1 block text-xs font-medium text-neutral-400">
         {label}
         {required && <span className="text-rose-400"> *</span>}
-        {hint && <span className="ml-1 text-slate-600">({hint})</span>}
+        {hint && <span className="ml-1 text-neutral-600">({hint})</span>}
       </span>
       {children}
     </label>

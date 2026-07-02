@@ -350,7 +350,7 @@ export default function JurisdictionsPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-white">Jurisdictions &amp; Rate Tables</h1>
-          <p className="mt-1 text-sm text-slate-400">Tax jurisdictions, taxability flags, and effective-dated combined rate tables.</p>
+          <p className="mt-1 text-sm text-neutral-400">Tax jurisdictions, taxability flags, and effective-dated combined rate tables.</p>
         </div>
         <Button onClick={openCreateJur}>+ New Jurisdiction</Button>
       </div>
@@ -366,7 +366,7 @@ export default function JurisdictionsPage() {
       {/* Lookup tool */}
       <Card className="p-5">
         <h2 className="text-sm font-semibold text-white">Jurisdiction Lookup</h2>
-        <p className="mt-0.5 text-xs text-slate-500">Resolve a ship-to location to its registered jurisdiction.</p>
+        <p className="mt-0.5 text-xs text-neutral-500">Resolve a ship-to location to its registered jurisdiction.</p>
         <div className="mt-4 flex flex-wrap items-end gap-3">
           <Field label="State" className="w-28">
             <select value={lookup.state} onChange={(e) => setLookup({ ...lookup, state: e.target.value })} className={inputCls}>
@@ -389,10 +389,10 @@ export default function JurisdictionsPage() {
                 No matching jurisdiction found. Consider adding one.
               </div>
             ) : (
-              <div className="flex flex-wrap items-center gap-3 rounded-lg border border-teal-900 bg-teal-950/30 px-4 py-3 text-sm">
+              <div className="flex flex-wrap items-center gap-3 rounded-lg border border-orange-900 bg-orange-950/30 px-4 py-3 text-sm">
                 <Badge tone="teal">{lookupResult.code}</Badge>
-                <span className="text-slate-200">{[lookupResult.city, lookupResult.county, lookupResult.state].filter(Boolean).join(', ')}</span>
-                <button className="text-teal-400 hover:underline" onClick={() => setSelectedId(lookupResult.id)}>view rates →</button>
+                <span className="text-neutral-200">{[lookupResult.city, lookupResult.county, lookupResult.state].filter(Boolean).join(', ')}</span>
+                <button className="text-orange-400 hover:underline" onClick={() => setSelectedId(lookupResult.id)}>view rates →</button>
               </div>
             )}
           </div>
@@ -402,8 +402,8 @@ export default function JurisdictionsPage() {
       {/* Filters */}
       <Card className="p-4">
         <div className="flex flex-wrap items-center gap-3">
-          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search code, county, city…" className="min-w-[200px] flex-1 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500" />
-          <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className="rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500">
+          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search code, county, city…" className="min-w-[200px] flex-1 rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-orange-500" />
+          <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className="rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-orange-500">
             <option value="">All states</option>
             {Array.from(new Set(jurisdictions.map((j) => j.state))).sort().map((s) => <option key={s} value={s}>{s}</option>)}
           </select>
@@ -442,9 +442,9 @@ export default function JurisdictionsPage() {
                     return now >= from && now <= to
                   }) ?? rates[0]
                   return (
-                    <TR key={j.id} className={selectedId === j.id ? 'bg-slate-900/60' : ''}>
-                      <TD className="font-medium text-slate-100">
-                        <button className="hover:text-teal-300" onClick={() => setSelectedId(j.id)}>{j.code}</button>
+                    <TR key={j.id} className={selectedId === j.id ? 'bg-neutral-900/60' : ''}>
+                      <TD className="font-medium text-neutral-100">
+                        <button className="hover:text-orange-300" onClick={() => setSelectedId(j.id)}>{j.code}</button>
                       </TD>
                       <TD>{[j.city, j.county, j.state].filter(Boolean).join(', ') || j.state}</TD>
                       <TD>
@@ -452,10 +452,10 @@ export default function JurisdictionsPage() {
                           {j.freight_taxable && <Badge tone="amber">freight</Badge>}
                           {j.labor_taxable && <Badge tone="amber">labor</Badge>}
                           {j.saas_taxable && <Badge tone="amber">SaaS</Badge>}
-                          {!j.freight_taxable && !j.labor_taxable && !j.saas_taxable && <span className="text-xs text-slate-600">none taxable</span>}
+                          {!j.freight_taxable && !j.labor_taxable && !j.saas_taxable && <span className="text-xs text-neutral-600">none taxable</span>}
                         </div>
                       </TD>
-                      <TD className="tabular-nums">{current ? pct(current.combined_rate) : <span className="text-slate-500">no rate</span>}</TD>
+                      <TD className="tabular-nums">{current ? pct(current.combined_rate) : <span className="text-neutral-500">no rate</span>}</TD>
                       <TD className="text-right">
                         <div className="flex justify-end gap-2">
                           <Button variant="ghost" className="px-2 py-1" onClick={() => setSelectedId(j.id)}>Rates</Button>
@@ -474,36 +474,36 @@ export default function JurisdictionsPage() {
         <div className="lg:col-span-2">
           <Card className="p-5">
             {!selected ? (
-              <p className="text-sm text-slate-500">Select a jurisdiction to view its effective-dated rate table.</p>
+              <p className="text-sm text-neutral-500">Select a jurisdiction to view its effective-dated rate table.</p>
             ) : (
               <>
                 <div className="flex items-start justify-between">
                   <div>
                     <h2 className="text-sm font-semibold text-white">{selected.code}</h2>
-                    <p className="text-xs text-slate-500">{[selected.city, selected.county, selected.state].filter(Boolean).join(', ') || selected.state}</p>
+                    <p className="text-xs text-neutral-500">{[selected.city, selected.county, selected.state].filter(Boolean).join(', ') || selected.state}</p>
                   </div>
                   <Button className="px-2 py-1 text-xs" onClick={() => openCreateRate(selected.id)}>+ Rate</Button>
                 </div>
                 <div className="mt-4 space-y-3">
                   {selectedRates.length === 0 ? (
-                    <p className="rounded-lg border border-dashed border-slate-800 px-3 py-6 text-center text-sm text-slate-500">No rates configured.</p>
+                    <p className="rounded-lg border border-dashed border-neutral-800 px-3 py-6 text-center text-sm text-neutral-500">No rates configured.</p>
                   ) : (
                     selectedRates.map((r) => (
-                      <div key={r.id} className="rounded-lg border border-slate-800 bg-slate-900/60 p-3">
+                      <div key={r.id} className="rounded-lg border border-neutral-800 bg-neutral-900/60 p-3">
                         <div className="flex items-center justify-between">
-                          <span className="text-lg font-bold tabular-nums text-teal-300">{pct(r.combined_rate)}</span>
+                          <span className="text-lg font-bold tabular-nums text-orange-300">{pct(r.combined_rate)}</span>
                           <div className="flex gap-1">
-                            <button className="text-xs text-slate-400 hover:text-white" onClick={() => openEditRate(r)}>edit</button>
+                            <button className="text-xs text-neutral-400 hover:text-white" onClick={() => openEditRate(r)}>edit</button>
                             <button className="text-xs text-rose-400 hover:text-rose-300" onClick={() => removeRate(r)}>del</button>
                           </div>
                         </div>
-                        <div className="mt-2 grid grid-cols-2 gap-1 text-xs text-slate-400">
+                        <div className="mt-2 grid grid-cols-2 gap-1 text-xs text-neutral-400">
                           <span>State: {pct(r.state_rate)}</span>
                           <span>County: {pct(r.county_rate)}</span>
                           <span>City: {pct(r.city_rate)}</span>
                           <span>District: {pct(r.district_rate)}</span>
                         </div>
-                        <div className="mt-2 text-xs text-slate-500">
+                        <div className="mt-2 text-xs text-neutral-500">
                           Effective {fmtDate(r.effective_from)} → {fmtDate(r.effective_to)}
                         </div>
                       </div>
@@ -554,15 +554,15 @@ export default function JurisdictionsPage() {
       <Modal open={rateOpen} onClose={() => setRateOpen(false)} title={editingRate ? 'Edit Rate' : 'New Rate'}>
         <form id="rate-form" onSubmit={submitRate} className="space-y-4">
           {rateError && <div className="rounded-lg border border-rose-900 bg-rose-950/40 px-3 py-2 text-sm text-rose-300">{rateError}</div>}
-          <p className="text-xs text-slate-500">Enter component rates as decimals (e.g. 0.0625 for 6.25%). Combined rate is computed automatically.</p>
+          <p className="text-xs text-neutral-500">Enter component rates as decimals (e.g. 0.0625 for 6.25%). Combined rate is computed automatically.</p>
           <div className="grid grid-cols-2 gap-4">
             <Field label="State rate"><input value={rateForm.state_rate} onChange={(e) => setRateForm({ ...rateForm, state_rate: e.target.value })} className={inputCls} placeholder="0.0625" inputMode="decimal" /></Field>
             <Field label="County rate"><input value={rateForm.county_rate} onChange={(e) => setRateForm({ ...rateForm, county_rate: e.target.value })} className={inputCls} placeholder="0.0025" inputMode="decimal" /></Field>
             <Field label="City rate"><input value={rateForm.city_rate} onChange={(e) => setRateForm({ ...rateForm, city_rate: e.target.value })} className={inputCls} placeholder="0.0100" inputMode="decimal" /></Field>
             <Field label="District rate"><input value={rateForm.district_rate} onChange={(e) => setRateForm({ ...rateForm, district_rate: e.target.value })} className={inputCls} placeholder="0.0050" inputMode="decimal" /></Field>
           </div>
-          <div className="rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2 text-sm text-slate-300">
-            Combined: <span className="font-bold tabular-nums text-teal-300">{pct(num(rateForm.state_rate) + num(rateForm.county_rate) + num(rateForm.city_rate) + num(rateForm.district_rate))}</span>
+          <div className="rounded-lg border border-neutral-800 bg-neutral-900/60 px-3 py-2 text-sm text-neutral-300">
+            Combined: <span className="font-bold tabular-nums text-orange-300">{pct(num(rateForm.state_rate) + num(rateForm.county_rate) + num(rateForm.city_rate) + num(rateForm.district_rate))}</span>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Field label="Effective from"><input type="date" value={rateForm.effective_from} onChange={(e) => setRateForm({ ...rateForm, effective_from: e.target.value })} className={inputCls} /></Field>
@@ -578,12 +578,12 @@ export default function JurisdictionsPage() {
   )
 }
 
-const inputCls = 'w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500'
+const inputCls = 'w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-orange-500'
 
 function Field({ label, children, className = '' }: { label: string; children: React.ReactNode; className?: string }) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-1 block text-xs font-medium text-slate-400">{label}</span>
+      <span className="mb-1 block text-xs font-medium text-neutral-400">{label}</span>
       {children}
     </label>
   )
@@ -591,8 +591,8 @@ function Field({ label, children, className = '' }: { label: string; children: R
 
 function Checkbox({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) {
   return (
-    <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-300">
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-teal-600 focus:ring-teal-500" />
+    <label className="flex cursor-pointer items-center gap-2 text-sm text-neutral-300">
+      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="h-4 w-4 rounded border-neutral-600 bg-neutral-800 text-orange-600 focus:ring-orange-500" />
       {label}
     </label>
   )

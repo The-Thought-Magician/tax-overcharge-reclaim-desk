@@ -29,14 +29,14 @@ export function Modal({ open, onClose, title, children, footer, className = '' }
       <div
         role="dialog"
         aria-modal="true"
-        className={`relative z-10 w-full max-w-lg rounded-xl border border-slate-800 bg-slate-900 shadow-2xl ${className}`}
+        className={`relative z-10 w-full max-w-lg rounded-xl border border-neutral-800 bg-neutral-900 shadow-2xl ${className}`}
       >
         {title && (
-          <div className="flex items-center justify-between border-b border-slate-800 px-6 py-4">
+          <div className="flex items-center justify-between border-b border-neutral-800 px-6 py-4">
             <h2 className="text-lg font-semibold text-white">{title}</h2>
             <button
               onClick={onClose}
-              className="rounded-lg p-1 text-slate-500 hover:bg-slate-800 hover:text-white transition-colors"
+              className="rounded-lg p-1 text-neutral-500 hover:bg-neutral-800 hover:text-white transition-colors"
               aria-label="Close"
             >
               ✕
@@ -44,7 +44,7 @@ export function Modal({ open, onClose, title, children, footer, className = '' }
           </div>
         )}
         <div className="px-6 py-5">{children}</div>
-        {footer && <div className="flex justify-end gap-3 border-t border-slate-800 px-6 py-4">{footer}</div>}
+        {footer && <div className="flex justify-end gap-3 border-t border-neutral-800 px-6 py-4">{footer}</div>}
       </div>
     </div>
   )

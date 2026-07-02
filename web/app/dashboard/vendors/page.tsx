@@ -208,7 +208,7 @@ export default function VendorsPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-white">Vendor Registry</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Suppliers under tax audit, with default taxability profiles and risk scoring.
           </p>
         </div>
@@ -230,12 +230,12 @@ export default function VendorsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search name, DBA, tax ID, contact…"
-            className="min-w-[220px] flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-teal-500 focus:outline-none"
+            className="min-w-[220px] flex-1 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-orange-500 focus:outline-none"
           />
           <select
             value={stateFilter}
             onChange={(e) => setStateFilter(e.target.value)}
-            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
           >
             <option value="">All states</option>
             {states.map((s) => (
@@ -245,7 +245,7 @@ export default function VendorsPage() {
           <select
             value={riskFilter}
             onChange={(e) => setRiskFilter(e.target.value)}
-            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
           >
             <option value="">All risk</option>
             <option value="High">High</option>
@@ -286,15 +286,15 @@ export default function VendorsPage() {
             {filtered.map((v) => (
               <TR key={v.id}>
                 <TD>
-                  <Link href={`/dashboard/vendors/${v.id}`} className="font-medium text-teal-300 hover:text-teal-200">
+                  <Link href={`/dashboard/vendors/${v.id}`} className="font-medium text-orange-300 hover:text-orange-200">
                     {v.name}
                   </Link>
-                  {v.dba && <div className="text-xs text-slate-500">dba {v.dba}</div>}
-                  {v.contact_email && <div className="text-xs text-slate-600">{v.contact_email}</div>}
+                  {v.dba && <div className="text-xs text-neutral-500">dba {v.dba}</div>}
+                  {v.contact_email && <div className="text-xs text-neutral-600">{v.contact_email}</div>}
                 </TD>
-                <TD>{v.default_state || <span className="text-slate-600">—</span>}</TD>
-                <TD className="font-mono text-xs">{v.tax_id || <span className="text-slate-600">—</span>}</TD>
-                <TD className="capitalize">{v.default_taxability || <span className="text-slate-600">—</span>}</TD>
+                <TD>{v.default_state || <span className="text-neutral-600">—</span>}</TD>
+                <TD className="font-mono text-xs">{v.tax_id || <span className="text-neutral-600">—</span>}</TD>
+                <TD className="capitalize">{v.default_taxability || <span className="text-neutral-600">—</span>}</TD>
                 <TD>
                   <Badge tone={riskTone(v.risk_score)}>
                     {riskLabel(v.risk_score)} · {Math.round((v.risk_score ?? 0) * 100)}%
@@ -408,7 +408,7 @@ export default function VendorsPage() {
 }
 
 const inputCls =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-teal-500 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-orange-500 focus:outline-none'
 
 function Field({
   label,
@@ -423,10 +423,10 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium text-slate-400">
+      <span className="mb-1 block text-xs font-medium text-neutral-400">
         {label}
         {required && <span className="text-rose-400"> *</span>}
-        {hint && <span className="ml-1 text-slate-600">({hint})</span>}
+        {hint && <span className="ml-1 text-neutral-600">({hint})</span>}
       </span>
       {children}
     </label>

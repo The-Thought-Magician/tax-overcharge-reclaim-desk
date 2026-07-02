@@ -273,7 +273,7 @@ export default function UseTaxPage() {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Use-Tax Reconciliation</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Worksheet of accrued use-tax. Match against vendor-charged tax and flag double payments.
           </p>
         </div>
@@ -300,9 +300,9 @@ export default function UseTaxPage() {
       </div>
 
       {reconcileResult && (
-        <Card className="border-teal-800/60 bg-teal-950/20 p-4">
+        <Card className="border-orange-800/60 bg-orange-950/20 p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="text-sm text-teal-200">
+            <div className="text-sm text-orange-200">
               Reconciliation complete — <strong>{reconcileResult.matched}</strong> matched,{' '}
               <strong className={reconcileResult.double_paid > 0 ? 'text-rose-300' : ''}>
                 {reconcileResult.double_paid}
@@ -323,12 +323,12 @@ export default function UseTaxPage() {
             placeholder="Search vendor, period, note…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="min-w-[200px] flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-teal-500 focus:outline-none"
+            className="min-w-[200px] flex-1 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-orange-500 focus:outline-none"
           />
           <select
             value={periodFilter}
             onChange={(e) => setPeriodFilter(e.target.value)}
-            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
           >
             <option value="">All periods</option>
             {periods.map((p) => (
@@ -337,13 +337,13 @@ export default function UseTaxPage() {
               </option>
             ))}
           </select>
-          <div className="flex gap-1 rounded-lg border border-slate-700 bg-slate-950 p-1">
+          <div className="flex gap-1 rounded-lg border border-neutral-700 bg-neutral-950 p-1">
             {STATUS_FILTERS.map((s) => (
               <button
                 key={s}
                 onClick={() => setStatusFilter(s)}
                 className={`rounded-md px-3 py-1 text-xs font-medium capitalize transition-colors ${
-                  statusFilter === s ? 'bg-teal-600 text-white' : 'text-slate-400 hover:text-slate-200'
+                  statusFilter === s ? 'bg-orange-600 text-white' : 'text-neutral-400 hover:text-neutral-200'
                 }`}
               >
                 {s.replace('_', ' ')}
@@ -405,10 +405,10 @@ export default function UseTaxPage() {
           <TBody>
             {filtered.map((e) => (
               <TR key={e.id}>
-                <TD className="font-medium text-slate-200">{e.period}</TD>
+                <TD className="font-medium text-neutral-200">{e.period}</TD>
                 <TD>{vendorName(e.vendor_id)}</TD>
-                <TD className="font-mono text-xs text-slate-500">{e.invoice_id ?? '—'}</TD>
-                <TD className="text-right tabular-nums text-slate-200">{fmtUsd(e.accrued_cents)}</TD>
+                <TD className="font-mono text-xs text-neutral-500">{e.invoice_id ?? '—'}</TD>
+                <TD className="text-right tabular-nums text-neutral-200">{fmtUsd(e.accrued_cents)}</TD>
                 <TD>
                   <div className="flex flex-wrap gap-1">
                     {e.double_paid ? (
@@ -420,7 +420,7 @@ export default function UseTaxPage() {
                     )}
                   </div>
                 </TD>
-                <TD className="max-w-[220px] truncate text-slate-400">{e.note ?? '—'}</TD>
+                <TD className="max-w-[220px] truncate text-neutral-400">{e.note ?? '—'}</TD>
                 <TD>
                   <div className="flex justify-end gap-2">
                     <Button variant="ghost" className="px-2 py-1 text-xs" onClick={() => toggleMatched(e)}>
@@ -460,32 +460,32 @@ export default function UseTaxPage() {
           )}
           <div className="grid grid-cols-2 gap-4">
             <label className="block">
-              <span className="mb-1 block text-xs font-medium text-slate-400">Period *</span>
+              <span className="mb-1 block text-xs font-medium text-neutral-400">Period *</span>
               <input
                 value={form.period}
                 onChange={(e) => setForm((f) => ({ ...f, period: e.target.value }))}
                 placeholder="2026-Q1"
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
               />
             </label>
             <label className="block">
-              <span className="mb-1 block text-xs font-medium text-slate-400">Accrued (USD) *</span>
+              <span className="mb-1 block text-xs font-medium text-neutral-400">Accrued (USD) *</span>
               <input
                 type="number"
                 step="0.01"
                 value={form.accrued_dollars}
                 onChange={(e) => setForm((f) => ({ ...f, accrued_dollars: e.target.value }))}
                 placeholder="0.00"
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+                className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
               />
             </label>
           </div>
           <label className="block">
-            <span className="mb-1 block text-xs font-medium text-slate-400">Vendor</span>
+            <span className="mb-1 block text-xs font-medium text-neutral-400">Vendor</span>
             <select
               value={form.vendor_id}
               onChange={(e) => setForm((f) => ({ ...f, vendor_id: e.target.value }))}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
             >
               <option value="">— None —</option>
               {vendors.map((v) => (
@@ -496,39 +496,39 @@ export default function UseTaxPage() {
             </select>
           </label>
           <label className="block">
-            <span className="mb-1 block text-xs font-medium text-slate-400">Invoice ID</span>
+            <span className="mb-1 block text-xs font-medium text-neutral-400">Invoice ID</span>
             <input
               value={form.invoice_id}
               onChange={(e) => setForm((f) => ({ ...f, invoice_id: e.target.value }))}
               placeholder="optional"
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-xs font-medium text-slate-400">Note</span>
+            <span className="mb-1 block text-xs font-medium text-neutral-400">Note</span>
             <textarea
               value={form.note}
               onChange={(e) => setForm((f) => ({ ...f, note: e.target.value }))}
               rows={2}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
             />
           </label>
           <div className="flex gap-6">
-            <label className="flex items-center gap-2 text-sm text-slate-300">
+            <label className="flex items-center gap-2 text-sm text-neutral-300">
               <input
                 type="checkbox"
                 checked={form.matched}
                 onChange={(e) => setForm((f) => ({ ...f, matched: e.target.checked }))}
-                className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-teal-600"
+                className="h-4 w-4 rounded border-neutral-600 bg-neutral-950 text-orange-600"
               />
               Matched
             </label>
-            <label className="flex items-center gap-2 text-sm text-slate-300">
+            <label className="flex items-center gap-2 text-sm text-neutral-300">
               <input
                 type="checkbox"
                 checked={form.double_paid}
                 onChange={(e) => setForm((f) => ({ ...f, double_paid: e.target.checked }))}
-                className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-rose-600"
+                className="h-4 w-4 rounded border-neutral-600 bg-neutral-950 text-rose-600"
               />
               Double-paid
             </label>

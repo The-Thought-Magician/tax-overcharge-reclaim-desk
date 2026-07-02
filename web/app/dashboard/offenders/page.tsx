@@ -55,13 +55,13 @@ const typeColors: Record<string, string> = {
   exempt_charged: 'bg-fuchsia-500',
   double_paid: 'bg-orange-500',
   freight_taxed: 'bg-sky-500',
-  labor_taxed: 'bg-teal-500',
+  labor_taxed: 'bg-orange-500',
   saas_taxed: 'bg-violet-500',
 }
 
 function colorFor(type: string, idx: number): string {
   if (typeColors[type]) return typeColors[type]
-  const fallback = ['bg-teal-500', 'bg-sky-500', 'bg-amber-500', 'bg-rose-500', 'bg-violet-500', 'bg-emerald-500']
+  const fallback = ['bg-orange-500', 'bg-sky-500', 'bg-amber-500', 'bg-rose-500', 'bg-violet-500', 'bg-emerald-500']
   return fallback[idx % fallback.length]
 }
 
@@ -159,7 +159,7 @@ export default function OffendersPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-white">Repeat Offenders</h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-neutral-400">
           Vendors ranked by total tax overcharged, with a breakdown of finding types.
         </p>
       </div>
@@ -186,14 +186,14 @@ export default function OffendersPage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search vendor…"
-                className="min-w-[220px] flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-teal-500 focus:outline-none"
+                className="min-w-[220px] flex-1 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-orange-500 focus:outline-none"
               />
               <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-500">Sort by</span>
+                <span className="text-xs text-neutral-500">Sort by</span>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as 'amount' | 'count')}
-                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+                  className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
                 >
                   <option value="amount">Overcharge amount</option>
                   <option value="count">Finding count</option>
@@ -201,9 +201,9 @@ export default function OffendersPage() {
               </div>
             </div>
             {allTypes.length > 0 && (
-              <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-slate-800 pt-3">
+              <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-neutral-800 pt-3">
                 {allTypes.map((t, i) => (
-                  <span key={t} className="flex items-center gap-1.5 text-xs text-slate-400">
+                  <span key={t} className="flex items-center gap-1.5 text-xs text-neutral-400">
                     <span className={`inline-block h-2.5 w-2.5 rounded-sm ${colorFor(t, i)}`} />
                     {t.replace(/_/g, ' ')}
                   </span>
@@ -232,22 +232,22 @@ export default function OffendersPage() {
                   const vid = vendorId(r)
                   return (
                     <TR key={vid || rank}>
-                      <TD className="text-slate-500 tabular-nums">{rank + 1}</TD>
+                      <TD className="text-neutral-500 tabular-nums">{rank + 1}</TD>
                       <TD>
                         {vid ? (
-                          <Link href={`/dashboard/vendors/${vid}`} className="font-medium text-teal-300 hover:text-teal-200">
+                          <Link href={`/dashboard/vendors/${vid}`} className="font-medium text-orange-300 hover:text-orange-200">
                             {vendorName(r)}
                           </Link>
                         ) : (
-                          <span className="font-medium text-slate-200">{vendorName(r)}</span>
+                          <span className="font-medium text-neutral-200">{vendorName(r)}</span>
                         )}
                         {rank === 0 && <Badge tone="rose" className="ml-2">Top offender</Badge>}
                       </TD>
                       <TD>
                         <div className="min-w-[180px]">
-                          <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-slate-800">
+                          <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-neutral-800">
                             {types.length === 0 ? (
-                              <div className="h-full w-full bg-slate-700" />
+                              <div className="h-full w-full bg-neutral-700" />
                             ) : (
                               types
                                 .slice()
@@ -263,7 +263,7 @@ export default function OffendersPage() {
                             )}
                           </div>
                           {types.length > 0 && (
-                            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-slate-500">
+                            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-neutral-500">
                               {types
                                 .slice()
                                 .sort((a, b) => b.cents - a.cents)
@@ -277,10 +277,10 @@ export default function OffendersPage() {
                           )}
                         </div>
                       </TD>
-                      <TD className="text-right tabular-nums text-slate-300">{r.finding_count}</TD>
+                      <TD className="text-right tabular-nums text-neutral-300">{r.finding_count}</TD>
                       <TD className="text-right">
                         <div className="font-semibold tabular-nums text-amber-300">{fmtMoney(r.total_overcharge_cents)}</div>
-                        <div className="mt-1 ml-auto h-1.5 w-24 overflow-hidden rounded-full bg-slate-800">
+                        <div className="mt-1 ml-auto h-1.5 w-24 overflow-hidden rounded-full bg-neutral-800">
                           <div
                             className="h-full rounded-full bg-amber-500"
                             style={{ width: `${max ? Math.max(4, ((r.total_overcharge_cents || 0) / max) * 100) : 0}%` }}

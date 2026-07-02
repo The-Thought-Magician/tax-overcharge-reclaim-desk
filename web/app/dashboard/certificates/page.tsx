@@ -359,7 +359,7 @@ export default function CertificatesPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-white">Exemption Certificates</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Registry of resale and exemption certificates, vendor/category coverage, and expiry tracking.
           </p>
         </div>
@@ -378,22 +378,22 @@ export default function CertificatesPage() {
         {/* Expiry distribution chart */}
         <Card className="p-5 lg:col-span-1">
           <h2 className="text-sm font-semibold text-white">Expiry Distribution</h2>
-          <p className="mt-0.5 text-xs text-slate-500">By days until valid_to</p>
+          <p className="mt-0.5 text-xs text-neutral-500">By days until valid_to</p>
           <div className="mt-4 space-y-3">
             {([
               ['Overdue', expiryDistribution.overdue, 'bg-rose-500'],
               ['0–30 days', expiryDistribution.d0_30, 'bg-amber-500'],
               ['31–60 days', expiryDistribution.d31_60, 'bg-yellow-500'],
-              ['61–90 days', expiryDistribution.d61_90, 'bg-teal-500'],
+              ['61–90 days', expiryDistribution.d61_90, 'bg-orange-500'],
               ['90+ days', expiryDistribution.future, 'bg-emerald-500'],
-              ['No expiry', expiryDistribution.none, 'bg-slate-600'],
+              ['No expiry', expiryDistribution.none, 'bg-neutral-600'],
             ] as const).map(([label, count, color]) => (
               <div key={label}>
-                <div className="flex items-center justify-between text-xs text-slate-400">
+                <div className="flex items-center justify-between text-xs text-neutral-400">
                   <span>{label}</span>
-                  <span className="tabular-nums text-slate-300">{count}</span>
+                  <span className="tabular-nums text-neutral-300">{count}</span>
                 </div>
-                <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-slate-800">
+                <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-neutral-800">
                   <div className={`h-full rounded-full ${color}`} style={{ width: `${(count / maxBucket) * 100}%` }} />
                 </div>
               </div>
@@ -406,12 +406,12 @@ export default function CertificatesPage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-sm font-semibold text-white">Expiring Soon</h2>
-              <p className="mt-0.5 text-xs text-slate-500">Certificates approaching their validity window end</p>
+              <p className="mt-0.5 text-xs text-neutral-500">Certificates approaching their validity window end</p>
             </div>
             <select
               value={expiryWindow}
               onChange={(e) => setExpiryWindow(Number(e.target.value))}
-              className="rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-1.5 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
             >
               <option value={30}>30 days</option>
               <option value={60}>60 days</option>
@@ -421,20 +421,20 @@ export default function CertificatesPage() {
           </div>
           <div className="mt-4">
             {expiring.length === 0 ? (
-              <p className="rounded-lg border border-dashed border-slate-800 bg-slate-900/40 px-4 py-6 text-center text-sm text-slate-500">
+              <p className="rounded-lg border border-dashed border-neutral-800 bg-neutral-900/40 px-4 py-6 text-center text-sm text-neutral-500">
                 No certificates expiring within {expiryWindow} days.
               </p>
             ) : (
-              <ul className="divide-y divide-slate-800">
+              <ul className="divide-y divide-neutral-800">
                 {expiring.map((c) => {
                   const d = daysUntil(c.valid_to)
                   return (
                     <li key={c.id} className="flex items-center justify-between gap-3 py-2.5">
                       <div className="min-w-0">
-                        <div className="truncate text-sm font-medium text-slate-200">
+                        <div className="truncate text-sm font-medium text-neutral-200">
                           {c.certificate_number || `${c.type} (${c.state})`}
                         </div>
-                        <div className="text-xs text-slate-500">
+                        <div className="text-xs text-neutral-500">
                           {c.type} · {c.state} · valid to {fmtDate(c.valid_to)}
                         </div>
                       </div>
@@ -457,17 +457,17 @@ export default function CertificatesPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search number, type, state, note…"
-            className="min-w-[200px] flex-1 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="min-w-[200px] flex-1 rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
-          <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500">
+          <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-orange-500">
             <option value="">All types</option>
             {CERT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
           </select>
-          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500">
+          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-orange-500">
             <option value="">All statuses</option>
             {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
           </select>
-          <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className="rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500">
+          <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className="rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-orange-500">
             <option value="">All states</option>
             {Array.from(new Set(certificates.map((c) => c.state))).sort().map((s) => <option key={s} value={s}>{s}</option>)}
           </select>
@@ -504,10 +504,10 @@ export default function CertificatesPage() {
               const d = daysUntil(c.valid_to)
               return (
                 <TR key={c.id}>
-                  <TD className="font-medium text-slate-100">
-                    {c.certificate_number || <span className="text-slate-500">—</span>}
+                  <TD className="font-medium text-neutral-100">
+                    {c.certificate_number || <span className="text-neutral-500">—</span>}
                     {c.document_url && (
-                      <a href={c.document_url} target="_blank" rel="noreferrer" className="ml-2 text-xs text-teal-400 hover:underline">doc</a>
+                      <a href={c.document_url} target="_blank" rel="noreferrer" className="ml-2 text-xs text-orange-400 hover:underline">doc</a>
                     )}
                   </TD>
                   <TD>{c.type}</TD>
@@ -516,8 +516,8 @@ export default function CertificatesPage() {
                   <TD>{fmtDate(c.valid_from)}</TD>
                   <TD>{fmtDate(c.valid_to)}</TD>
                   <TD>
-                    {d === null ? <span className="text-slate-500">—</span> : (
-                      <span className={d < 0 ? 'text-rose-400' : d <= 30 ? 'text-amber-400' : 'text-slate-400'}>
+                    {d === null ? <span className="text-neutral-500">—</span> : (
+                      <span className={d < 0 ? 'text-rose-400' : d <= 30 ? 'text-amber-400' : 'text-neutral-400'}>
                         {d < 0 ? `${Math.abs(d)}d overdue` : `${d}d`}
                       </span>
                     )}
@@ -596,7 +596,7 @@ export default function CertificatesPage() {
         title={coverageCert ? `Coverage · ${coverageCert.certificate_number || coverageCert.type}` : 'Coverage'}
       >
         <div className="space-y-4">
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-neutral-400">
             Scope this certificate to specific vendors and/or product categories. Leaving a field blank applies it broadly.
           </p>
           <div className="grid grid-cols-2 gap-3">
@@ -616,19 +616,19 @@ export default function CertificatesPage() {
           <Button onClick={addCoverage} disabled={coverageSaving}>{coverageSaving ? 'Adding…' : '+ Add Coverage'}</Button>
 
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500">Current Coverage</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wide text-neutral-500">Current Coverage</h3>
             {coverageLoading ? (
               <div className="py-4"><Spinner /></div>
             ) : coverageRows.length === 0 ? (
-              <p className="mt-2 rounded-lg border border-dashed border-slate-800 px-3 py-4 text-center text-sm text-slate-500">
+              <p className="mt-2 rounded-lg border border-dashed border-neutral-800 px-3 py-4 text-center text-sm text-neutral-500">
                 No coverage records yet.
               </p>
             ) : (
               <ul className="mt-2 space-y-2">
                 {coverageRows.map((row) => (
-                  <li key={row.id} className="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2 text-sm">
+                  <li key={row.id} className="flex items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900/60 px-3 py-2 text-sm">
                     <Badge tone="teal">{vendorName(row.vendor_id) ?? 'Any vendor'}</Badge>
-                    <span className="text-slate-600">×</span>
+                    <span className="text-neutral-600">×</span>
                     <Badge tone="blue">{categoryName(row.category_id) ?? 'Any category'}</Badge>
                   </li>
                 ))}
@@ -641,12 +641,12 @@ export default function CertificatesPage() {
   )
 }
 
-const inputCls = 'w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500'
+const inputCls = 'w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-orange-500'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium text-slate-400">{label}</span>
+      <span className="mb-1 block text-xs font-medium text-neutral-400">{label}</span>
       {children}
     </label>
   )

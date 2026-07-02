@@ -250,7 +250,7 @@ export default function InvoicesPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Invoices</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             AP invoices feeding the overcharge audit. Import, dedupe, and drill into line-level results.
           </p>
         </div>
@@ -279,19 +279,19 @@ export default function InvoicesPage() {
             <h2 className="text-sm font-semibold text-amber-200">
               Duplicate check: {dupes.length} group{dupes.length === 1 ? '' : 's'} found
             </h2>
-            <button onClick={() => setDupes(null)} className="text-xs text-slate-500 hover:text-slate-300">
+            <button onClick={() => setDupes(null)} className="text-xs text-neutral-500 hover:text-neutral-300">
               Dismiss
             </button>
           </div>
           {dupes.length === 0 ? (
-            <p className="mt-2 text-sm text-slate-400">No duplicate invoices detected.</p>
+            <p className="mt-2 text-sm text-neutral-400">No duplicate invoices detected.</p>
           ) : (
             <ul className="mt-3 space-y-2">
               {dupes.map((g, i) => (
-                <li key={i} className="flex items-center justify-between rounded-lg bg-slate-900/60 px-3 py-2 text-sm">
-                  <span className="text-slate-200">
+                <li key={i} className="flex items-center justify-between rounded-lg bg-neutral-900/60 px-3 py-2 text-sm">
+                  <span className="text-neutral-200">
                     {g.invoice_number ? `#${g.invoice_number}` : 'Group'}{' '}
-                    {g.vendor_id && <span className="text-slate-500">· {vendorName(g.vendor_id)}</span>}
+                    {g.vendor_id && <span className="text-neutral-500">· {vendorName(g.vendor_id)}</span>}
                   </span>
                   <Badge tone="amber">{g.count ?? (g.invoice_ids || g.ids || []).length} copies</Badge>
                 </li>
@@ -319,7 +319,7 @@ export default function InvoicesPage() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search invoice #, vendor, or state…"
-          className="w-full max-w-xs rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-teal-500 focus:outline-none"
+          className="w-full max-w-xs rounded-lg border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-orange-500 focus:outline-none"
         />
         <div className="flex gap-1">
           {STATUSES.map((s) => (
@@ -328,8 +328,8 @@ export default function InvoicesPage() {
               onClick={() => setStatusFilter(s)}
               className={`rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
                 statusFilter === s
-                  ? 'bg-teal-600/20 text-teal-300'
-                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                  ? 'bg-orange-600/20 text-orange-300'
+                  : 'text-neutral-400 hover:bg-neutral-800 hover:text-neutral-200'
               }`}
             >
               {s || 'all'}
@@ -375,8 +375,8 @@ export default function InvoicesPage() {
           <TBody>
             {filtered.map((inv) => (
               <TR key={inv.id}>
-                <TD className="font-medium text-slate-100">
-                  <Link href={`/dashboard/invoices/${inv.id}`} className="hover:text-teal-300">
+                <TD className="font-medium text-neutral-100">
+                  <Link href={`/dashboard/invoices/${inv.id}`} className="hover:text-orange-300">
                     {inv.invoice_number || inv.id.slice(0, 8)}
                   </Link>
                 </TD>
@@ -385,12 +385,12 @@ export default function InvoicesPage() {
                 <TD>{inv.ship_to_state || '—'}</TD>
                 <TD className="text-right tabular-nums">{money(inv.subtotal_cents)}</TD>
                 <TD className="text-right tabular-nums">{money(inv.tax_cents)}</TD>
-                <TD className="text-right font-medium tabular-nums text-slate-100">{money(inv.total_cents)}</TD>
+                <TD className="text-right font-medium tabular-nums text-neutral-100">{money(inv.total_cents)}</TD>
                 <TD>
                   <Badge tone={statusTone(inv.status)}>{inv.status || 'unknown'}</Badge>
                 </TD>
                 <TD>
-                  <Link href={`/dashboard/invoices/${inv.id}`} className="text-sm text-teal-400 hover:text-teal-300">
+                  <Link href={`/dashboard/invoices/${inv.id}`} className="text-sm text-orange-400 hover:text-orange-300">
                     Audit →
                   </Link>
                 </TD>
@@ -498,7 +498,7 @@ export default function InvoicesPage() {
         }
       >
         <div className="space-y-3">
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-neutral-400">
             Paste a JSON array of invoice rows. Cents fields are integers. Each row may include line items.
           </p>
           <textarea
@@ -506,12 +506,12 @@ export default function InvoicesPage() {
             onChange={(e) => setImportText(e.target.value)}
             rows={10}
             placeholder={sampleImport}
-            className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 font-mono text-xs text-slate-200 placeholder:text-slate-600 focus:border-teal-500 focus:outline-none"
+            className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 font-mono text-xs text-neutral-200 placeholder:text-neutral-600 focus:border-orange-500 focus:outline-none"
           />
           <button
             type="button"
             onClick={() => setImportText(sampleImport)}
-            className="text-xs text-teal-400 hover:text-teal-300"
+            className="text-xs text-orange-400 hover:text-orange-300"
           >
             Insert sample row
           </button>
@@ -527,12 +527,12 @@ export default function InvoicesPage() {
 }
 
 const inputClass =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-teal-500 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-orange-500 focus:outline-none'
 
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium text-slate-400">
+      <span className="mb-1 block text-xs font-medium text-neutral-400">
         {label} {required && <span className="text-rose-400">*</span>}
       </span>
       {children}

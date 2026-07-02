@@ -216,7 +216,7 @@ export default function ReportsPage() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-white">Reports</h1>
-          <p className="mt-1 text-sm text-slate-400">{TABS.find((t) => t.id === tab)?.desc}</p>
+          <p className="mt-1 text-sm text-neutral-400">{TABS.find((t) => t.id === tab)?.desc}</p>
         </div>
         <div className="flex gap-2">
           <Button
@@ -232,7 +232,7 @@ export default function ReportsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="inline-flex flex-wrap rounded-lg border border-slate-700 bg-slate-900 p-1">
+      <div className="inline-flex flex-wrap rounded-lg border border-neutral-700 bg-neutral-900 p-1">
         {TABS.map((t) => (
           <button
             key={t.id}
@@ -241,7 +241,7 @@ export default function ReportsPage() {
               setSearch('')
             }}
             className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-              tab === t.id ? 'bg-teal-600 text-white' : 'text-slate-400 hover:text-white'
+              tab === t.id ? 'bg-orange-600 text-white' : 'text-neutral-400 hover:text-white'
             }`}
           >
             {t.label}
@@ -265,14 +265,14 @@ export default function ReportsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search rows…"
-            className="min-w-[12rem] flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-teal-500 focus:outline-none"
+            className="min-w-[12rem] flex-1 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-orange-500 focus:outline-none"
           />
           {tab === 'findings' && (
             <>
               <select
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
               >
                 {FINDING_TYPES.map((t) => (
                   <option key={t} value={t}>
@@ -283,7 +283,7 @@ export default function ReportsPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-teal-500 focus:outline-none"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-orange-500 focus:outline-none"
               >
                 {FINDING_STATUSES.map((s) => (
                   <option key={s} value={s}>
@@ -340,7 +340,7 @@ export default function ReportsPage() {
                   <TD
                     key={c}
                     className={`${isCentsKey(c) ? 'text-right tabular-nums' : ''} ${
-                      isCentsKey(c) ? 'text-teal-300' : ''
+                      isCentsKey(c) ? 'text-orange-300' : ''
                     }`}
                   >
                     {renderCell(c, r[c])}
